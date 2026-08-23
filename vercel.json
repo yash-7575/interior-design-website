@@ -1,0 +1,16 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "installCommand": "cd 'Kimi_Agent_Website Replication Essentials/app' && npm ci",
+  "buildCommand": "cd 'Kimi_Agent_Website Replication Essentials/app' && npm run build",
+  "outputDirectory": "Kimi_Agent_Website Replication Essentials/app/dist",
+  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }],
+  "headers": [
+    {
+      "source": "/assets/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    }
+  ]
+}
