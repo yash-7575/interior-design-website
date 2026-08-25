@@ -13,120 +13,108 @@ import listing5 from "@/assets/img/listing-5.jpg";
 import blog1 from "@/assets/img/blog-1.jpg";
 import blog2 from "@/assets/img/blog-2.jpg";
 import blog3 from "@/assets/img/blog-3.jpg";
-import avatar1 from "@/assets/img/avatar-1.jpg";
-import avatar2 from "@/assets/img/avatar-2.jpg";
-import avatar3 from "@/assets/img/avatar-3.jpg";
 
 export const images = {
   hero,
   aboutDining,
   aboutKitchen,
   services,
-  avatars: [avatar1, avatar2, avatar3],
 };
 
-export const stats = [
-  { value: 10, suffix: "+", label: "Years", sub: "Years of Interior Experience" },
-  { value: 98, suffix: "%", label: "Satisfied", sub: "Satisfied Valued Clients" },
-  { value: 50, suffix: "+", label: "Projects", sub: "Active Interior Projects" },
-  { value: 50, suffix: "K+", label: "Clients", sub: "Happy Clients" },
-];
+export { stats } from "@/data/business";
 
+// TODO: replace with real MegaDream project photos and names once the client
+// uploads them to the shared Drive folder.
 export const featured = [
   {
-    name: "Shaazzz Interior Studio",
-    location: "Elegant Coastal Living Concept",
-    desc: "Minimalist luxury interiors with premium materials, open spaces, and calming ocean-inspired elegance.",
-    price: "$19,500.00",
+    name: "3 BHK Turnkey Interior",
+    location: "Ambegaon Budruk, Pune",
+    desc: "Full-home execution with in-house modular kitchen, wardrobes, false ceiling and electrical rework — handed over in twelve weeks.",
+    scope: "Turnkey · 1,250 sq ft",
     image: slide1,
-    tag: "Infinity View Concept",
+    tag: "Residential",
   },
   {
-    name: "The Private Sanctuary",
-    location: "Coral Gables, FL",
-    desc: "A perfect balance of modern design and tranquil textures, creating an elegant space for relaxation.",
-    price: "$28,900.00",
+    name: "Corporate Office Fit-Out",
+    location: "Katraj, Pune",
+    desc: "Workstations, cabin partitions, acoustic ceiling and glass glazing delivered around the client's working hours with zero downtime.",
+    scope: "Commercial · 3,400 sq ft",
     image: slide2,
-    tag: "Infinity View Concept",
+    tag: "Corporate",
   },
   {
-    name: "Serene Coastal Retreat",
-    location: "Malibu, CA",
-    desc: "Soft neutral palettes and natural light compose a timeless retreat crafted for calm modern living.",
-    price: "$24,700.00",
+    name: "Modular Kitchen & Storage",
+    location: "Dhankawadi, Pune",
+    desc: "Custom-manufactured modular kitchen with tall units, corner solutions and matching utility storage, built in our own facility.",
+    scope: "Modular · 180 sq ft",
     image: slide3,
-    tag: "Infinity View Concept",
+    tag: "Furniture",
   },
 ];
 
 export const serviceCategories = [
-  "Residential Design",
-  "Commercial Spaces",
-  "Bespoke Furniture",
-  "Lighting Curation",
-  "Art & Decor",
+  "Turnkey Execution",
+  "Furniture & Modular",
+  "Civil & Fabrication",
+  "Electrical & Plumbing",
+  "Commercial Fit-Outs",
 ];
 
 export const serviceItems = [
   {
     num: "01",
-    title: "Residential Living Space",
-    desc: "Thoughtfully designed residential spaces that blend comfort, functionality, and modern aesthetics to enhance everyday lifestyle experiences.",
+    title: "One team, every trade",
+    desc: "Carpentry, ceiling, electrical, plumbing, glazing and painting are all handled in-house — so there is one schedule, one quotation and one person answerable for the result.",
   },
-  { num: "02", title: "High-Performance Collaboration", desc: "" },
-  { num: "03", title: "Curated Private Art Collections", desc: "" },
-  { num: "04", title: "Heritage Material Sourcing", desc: "" },
+  { num: "02", title: "Furniture built in our own facility", desc: "" },
+  { num: "03", title: "3D renders before work begins", desc: "" },
+  { num: "04", title: "Itemised, transparent costing", desc: "" },
 ];
 
+// TODO: replace with real MegaDream project photos and names.
 export const listings = [
-  { name: "Elegant Modern Dining Haven", location: "Syracuse, Connecticut", price: "$19,500.00", image: listing1 },
-  { name: "Minimalist Luxury Lounge", location: "Syracuse, Connecticut", price: "$19,500.00", image: listing2 },
-  { name: "Bright Contemporary Serenity Space", location: "Syracuse, Connecticut", price: "$19,500.00", image: listing3, wide: true },
-  { name: "Warm Modern Comfort Living", location: "Syracuse, Connecticut", price: "$19,500.00", image: listing4 },
-  { name: "Cozy Elegant Haven", location: "Syracuse, Connecticut", price: "$19,500.00", image: listing5 },
+  { name: "Contemporary Living Room", location: "Ambegaon Budruk, Pune", scope: "Residential", image: listing1 },
+  { name: "Master Bedroom & Wardrobe", location: "Katraj, Pune", scope: "Residential", image: listing2 },
+  { name: "Open-Plan Modular Kitchen", location: "Dhankawadi, Pune", scope: "Modular", image: listing3, wide: true },
+  { name: "Corporate Cabin Interior", location: "Kondhwa, Pune", scope: "Commercial", image: listing4 },
+  { name: "Compact Apartment Makeover", location: "Narhe, Pune", scope: "Renovation", image: listing5 },
 ];
 
 export const posts = [
   {
-    title: "Enduring Luxury: Interiors Designed to Inspire",
-    desc: "Designed with precision and refined aesthetics, our featured projects showcase modern elegance, functional design, curated textures, bespoke elements, and a timeless sense of luxury.",
+    title: "What Turnkey Interiors Actually Include",
+    desc: "Turnkey means more than furniture. Here is every trade a complete interior project touches — and the questions worth asking before you sign a quotation.",
     date: "12 Feb 2026",
-    category: "Interior Design",
+    category: "Turnkey Execution",
     image: blog1,
   },
   {
-    title: "Elevating Modern Living with Minimalist Elegance",
+    title: "Choosing Materials for a Pune Modular Kitchen",
     desc: "",
     date: "8 Dec 2025",
-    category: "Residential",
+    category: "Modular Kitchens",
     image: blog2,
   },
   {
-    title: "Sustainable Luxury: Designing Eco-Conscious Interiors",
+    title: "Planning Electricals Before the Carpentry Starts",
     desc: "",
     date: "25 Jan 2026",
-    category: "Eco Design",
+    category: "Execution Notes",
     image: blog3,
   },
 ];
 
 export const footerLinks = {
-  socials: [
-    { label: "Facebook", url: "https://facebook.com" },
-    { label: "Instagram", url: "https://instagram.com" },
-    { label: "Twitter", url: "https://twitter.com" },
-    { label: "Linkedin", url: "https://linkedin.com" },
-  ],
   quick: [
     { label: "Projects", path: "/projects" },
-    { label: "About Studio", path: "/about" },
-    { label: "Design Services", path: "/services" },
+    { label: "About Us", path: "/about" },
+    { label: "Services", path: "/services" },
     { label: "Contact", path: "/contact" },
   ],
   property: [
-    { label: "Living Spaces", path: "/projects" },
-    { label: "Luxury Bedrooms", path: "/projects" },
-    { label: "Modular Kitchens", path: "/projects" },
-    { label: "Office Interiors", path: "/services" },
+    { label: "Residential Interiors", path: "/services" },
+    { label: "Modular Kitchens", path: "/services" },
+    { label: "Custom Furniture", path: "/services" },
+    { label: "Office Fit-Outs", path: "/services" },
   ],
 };

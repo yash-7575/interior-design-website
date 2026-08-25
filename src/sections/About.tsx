@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import { ChevronRight } from "lucide-react";
-import { images, stats } from "@/data/content";
+import { images } from "@/data/content";
+import { business, stats } from "@/data/business";
 
 function CountUp({ value, suffix }: { value: number; suffix: string }) {
   const ref = useRef<HTMLSpanElement>(null);
@@ -48,7 +49,7 @@ export default function About() {
             <div className="overflow-hidden rounded-sm max-w-[260px]">
               <motion.img
                 src={images.aboutDining}
-                alt="Elegant dining area"
+                alt="Completed residential interior"
                 className="w-full aspect-[4/3] object-cover hover:scale-105 transition-transform duration-700"
               />
             </div>
@@ -57,24 +58,22 @@ export default function About() {
           {/* center text */}
           <motion.div {...fadeUp} transition={{ duration: 0.8, delay: 0.1 }} className="lg:col-span-5 order-1 lg:order-2">
             <h2 className="font-serif-display text-4xl md:text-6xl text-[#2b241d] leading-[1.1]">
-              Timeless Interiors
+              Turnkey Execution
               <br />
-              Elevated Living
+              Built on Trust
             </h2>
             <p className="text-[#6b6156] mt-8 max-w-md leading-relaxed text-[15px]">
-              Specializing in luxury interiors, we transform spaces into refined
-              living experiences. Every project is thoughtfully designed, ensuring
-              comfort elegance, and a seamless journey from concept to completion.
+              {business.about}
             </p>
             <div className="flex mt-10">
               <a
-                href="#services"
+                href="/about"
                 className="bg-[#33291f] text-white text-sm px-7 py-3.5 rounded-l-full hover:bg-[#241c14] transition-colors"
               >
                 More About Us
               </a>
               <a
-                href="#services"
+                href="/about"
                 className="bg-[#33291f] text-white px-4 py-3.5 rounded-r-full border-l border-white/15 hover:bg-[#241c14] transition-colors"
                 aria-label="More about us"
               >
@@ -88,7 +87,7 @@ export default function About() {
             <div className="overflow-hidden rounded-sm lg:mt-16">
               <img
                 src={images.aboutKitchen}
-                alt="Modern luxury kitchen"
+                alt="In-house manufactured modular kitchen"
                 className="w-full aspect-[3/4] object-cover hover:scale-105 transition-transform duration-700"
               />
             </div>

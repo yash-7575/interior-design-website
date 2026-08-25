@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
-import { ChevronRight } from "lucide-react";
+import { ChevronRight, Phone } from "lucide-react";
+import { business, whatsappLink, defaultEnquiry, stats } from "@/data/business";
 
 function CountUp({ value, suffix }: { value: number; suffix: string }) {
   const ref = useRef<HTMLSpanElement>(null);
@@ -38,41 +39,39 @@ const fadeUp = {
 
 const team = [
   {
-    name: "Elena Vasquez",
-    role: "Founder & Principal Designer",
-    bio: "20+ years crafting timeless interiors for discerning clients worldwide. Featured in AD, Elle Decor, and Wallpaper*.",
-    image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=400&fit=crop&crop=face",
-  },
-  {
-    name: "Marcus Chen",
-    role: "Creative Director",
-    bio: "Former senior designer at Kelly Wearstler. Specializes in residential luxury and bespoke furniture curation.",
+    name: "Durgesh Mishra",
+    role: "Founder & Project Head",
+    bio: "Leads site execution and client relationships. Oversees every project from the first site visit through final handover.",
+    phone: "+91 97623 08053",
+    // TODO: replace with a real photograph once supplied.
     image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face",
   },
   {
-    name: "Sophie Laurent",
-    role: "Lead Project Manager",
-    bio: "Architecture background with 15 years managing complex luxury renovations across Europe and North America.",
-    image: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=400&h=400&fit=crop&crop=face",
+    name: "Raj Mishra",
+    role: "Partner & Design Lead",
+    bio: "Handles design, 3D visualisation and costing. Your first point of contact for new enquiries on WhatsApp.",
+    phone: "+91 83298 42119",
+    // TODO: replace with a real photograph once supplied.
+    image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&h=400&fit=crop&crop=face",
   },
 ];
 
 const values = [
   {
-    title: "Timeless Over Trendy",
-    desc: "We design spaces that endure beyond seasons, blending classic proportions with modern sensibility.",
+    title: "Turnkey Accountability",
+    desc: "One contract covers every trade. You never have to chase a carpenter, an electrician and a painter separately — that coordination is our job, not yours.",
   },
   {
-    title: "Craftsmanship First",
-    desc: "Every detail is executed by master artisans. Quality is never compromised for speed or cost.",
+    title: "Built, Not Outsourced",
+    desc: "Modular units and custom furniture come out of our own manufacturing facility, so the finish and the delivery date stay under our control.",
   },
   {
-    title: "Client as Collaborator",
-    desc: "Your vision guides our process. We listen deeply, then elevate your ideas with expertise.",
+    title: "Transparent Costing",
+    desc: "An itemised quotation before work starts, broken down by trade. You can see what each element costs and adjust the scope before committing.",
   },
   {
-    title: "Sustainable Luxury",
-    desc: "Responsible sourcing, durable materials, and energy-conscious design are non-negotiable.",
+    title: "Long-Term Trust",
+    desc: "Most of our work comes from referrals and repeat clients. We stay reachable after handover, because that is what keeps that cycle going.",
   },
 ];
 
@@ -83,7 +82,7 @@ export default function About() {
       <section className="relative h-[70vh] min-h-[500px] overflow-hidden">
         <motion.img
           src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1920&q=80"
-          alt="Elegant interior design studio workspace"
+          alt="MegaDream Associates interior project"
           className="absolute inset-0 w-full h-full object-cover"
           initial={{ scale: 1.12 }}
           animate={{ scale: 1 }}
@@ -97,9 +96,9 @@ export default function About() {
             transition={{ duration: 0.9, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
             className="font-serif-display text-white text-5xl md:text-7xl leading-[1.08] max-w-3xl"
           >
-            Our Story:
+            Built in Pune,
             <br />
-            Timeless Interiors
+            Trusted Since Day One
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 24 }}
@@ -107,7 +106,8 @@ export default function About() {
             transition={{ duration: 0.8, delay: 0.55 }}
             className="text-white/75 text-sm md:text-base mt-6 max-w-md leading-relaxed"
           >
-            Two decades of crafting spaces that define luxury living. Meet the team behind the vision.
+            Turnkey interior execution specialists and furniture manufacturers. Meet
+            the people who will run your project.
           </motion.p>
         </div>
       </section>
@@ -121,7 +121,7 @@ export default function About() {
               <div className="overflow-hidden rounded-sm max-w-[260px]">
                 <motion.img
                   src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=520&h=650&fit=crop"
-                  alt="Elegant dining area with modern chandelier"
+                  alt="Completed residential interior"
                   className="w-full aspect-[4/3] object-cover hover:scale-105 transition-transform duration-700"
                 />
               </div>
@@ -129,24 +129,27 @@ export default function About() {
 
             <motion.div {...fadeUp} transition={{ duration: 0.8, delay: 0.1 }} className="lg:col-span-5 order-1 lg:order-2">
               <h2 className="font-serif-display text-4xl md:text-6xl text-[#2b241d] leading-[1.1]">
-                Timeless Interiors
+                Turnkey Execution
                 <br />
-                Elevated Living
+                Built on Trust
               </h2>
               <p className="text-[#6b6156] mt-8 max-w-md leading-relaxed text-[15px]">
-                Founded in 2004 by Elena Vasquez, Eloria began as a small atelier in Manhattan
-                and has grown into an internationally recognized design studio. We specialize in
-                luxury residential and commercial interiors that balance aesthetic excellence with
-                livable comfort.
+                {business.about}
               </p>
               <p className="text-[#6b6156] mt-6 max-w-md leading-relaxed text-[15px]">
-                Every project begins with listening — understanding how you live, work, and dream
-                in your spaces. We then translate that into environments that feel both inevitable
-                and extraordinary.
+                Working out of {business.city}, we take on the whole project rather
+                than a slice of it — layout and 3D design, civil and ceiling work,
+                electrical and plumbing, and the modular furniture we manufacture
+                ourselves. One team, one schedule, one person answerable for the
+                result.
+              </p>
+              <p className="text-[#6b6156] mt-6 max-w-md leading-relaxed text-[15px]">
+                We work across {business.serviceArea}, on everything from a single
+                modular kitchen to a full corporate fit-out.
               </p>
               <div className="flex mt-10">
                 <a
-                  href="#services"
+                  href="/services"
                   className="bg-[#33291f] text-white text-sm px-7 py-3.5 rounded-l-full hover:bg-[#241c14] transition-colors"
                 >
                   Explore Services
@@ -165,7 +168,7 @@ export default function About() {
               <div className="overflow-hidden rounded-sm lg:mt-16">
                 <img
                   src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&h=800&fit=crop"
-                  alt="Modern luxury kitchen with marble island"
+                  alt="Modular kitchen manufactured in-house"
                   className="w-full aspect-[3/4] object-cover hover:scale-105 transition-transform duration-700"
                 />
               </div>
@@ -174,58 +177,22 @@ export default function About() {
 
           {/* Stats */}
           <div className="grid grid-cols-2 lg:grid-cols-4 mt-24 md:mt-32 border-t border-[#e2d9c8]">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.7 }}
-              className="pt-10 pb-4 px-2 md:px-8"
-            >
-              <div className="flex items-end gap-2 flex-wrap">
-                <CountUp value={20} suffix="+" />
-                <span className="text-[#8a7d6c] text-sm mb-2">Years</span>
-              </div>
-              <p className="text-[#6b6156] text-sm mt-6 border-t border-[#e2d9c8] pt-5">Years of Experience</p>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.7, delay: 0.12 }}
-              className="pt-10 pb-4 px-2 md:px-8 lg:border-l border-[#e2d9c8]"
-            >
-              <div className="flex items-end gap-2 flex-wrap">
-                <CountUp value={150} suffix="+" />
-                <span className="text-[#8a7d6c] text-sm mb-2">Projects</span>
-              </div>
-              <p className="text-[#6b6156] text-sm mt-6 border-t border-[#e2d9c8] pt-5">Completed Projects</p>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.7, delay: 0.24 }}
-              className="pt-10 pb-4 px-2 md:px-8 lg:border-l border-[#e2d9c8]"
-            >
-              <div className="flex items-end gap-2 flex-wrap">
-                <CountUp value={12} suffix="" />
-                <span className="text-[#8a7d6c] text-sm mb-2">Team</span>
-              </div>
-              <p className="text-[#6b6156] text-sm mt-6 border-t border-[#e2d9c8] pt-5">Design Professionals</p>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.7, delay: 0.36 }}
-              className="pt-10 pb-4 px-2 md:px-8 lg:border-l border-[#e2d9c8]"
-            >
-              <div className="flex items-end gap-2 flex-wrap">
-                <CountUp value={98} suffix="%" />
-                <span className="text-[#8a7d6c] text-sm mb-2">Satisfied</span>
-              </div>
-              <p className="text-[#6b6156] text-sm mt-6 border-t border-[#e2d9c8] pt-5">Client Retention Rate</p>
-            </motion.div>
+            {stats.map((s, i) => (
+              <motion.div
+                key={s.sub}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.7, delay: i * 0.12 }}
+                className={`pt-10 pb-4 px-2 md:px-8 ${i > 0 ? "lg:border-l border-[#e2d9c8]" : ""}`}
+              >
+                <div className="flex items-end gap-2 flex-wrap">
+                  <CountUp value={s.value} suffix={s.suffix} />
+                  <span className="text-[#8a7d6c] text-sm mb-2">{s.label}</span>
+                </div>
+                <p className="text-[#6b6156] text-sm mt-6 border-t border-[#e2d9c8] pt-5">{s.sub}</p>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
@@ -242,7 +209,7 @@ export default function About() {
           >
             <p className="text-xs tracking-[0.3em] text-[#6b5b4a] font-medium">OUR PHILOSOPHY</p>
             <h2 className="font-serif-display text-4xl md:text-6xl text-[#2b241d] leading-[1.12] mt-6">
-              Principles That Guide Every Design Decision
+              How We Work
             </h2>
           </motion.div>
 
@@ -278,11 +245,11 @@ export default function About() {
           >
             <p className="text-xs tracking-[0.3em] text-[#6b5b4a] font-medium">MEET THE TEAM</p>
             <h2 className="font-serif-display text-4xl md:text-6xl text-[#2b241d] leading-[1.12] mt-6">
-              The Visionaries Behind Eloria
+              The People Behind {business.shortName}
             </h2>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 max-w-3xl mx-auto">
             {team.map((member, i) => (
               <motion.div
                 key={member.name}
@@ -304,6 +271,13 @@ export default function About() {
                   <h3 className="font-serif-display text-xl md:text-2xl text-[#2b241d]">{member.name}</h3>
                   <p className="text-[#8a7d6c] text-sm mt-1 font-medium">{member.role}</p>
                   <p className="text-[#6b6156] text-sm leading-relaxed mt-4">{member.bio}</p>
+                  <a
+                    href={`tel:${member.phone.replace(/\s/g, "")}`}
+                    className="inline-flex items-center gap-2 text-sm font-medium text-[#33291f] hover:text-[#241c14] transition-colors mt-4"
+                  >
+                    <Phone className="w-4 h-4" />
+                    {member.phone}
+                  </a>
                 </div>
               </motion.div>
             ))}
@@ -321,7 +295,7 @@ export default function About() {
             transition={{ duration: 0.8 }}
             className="font-serif-display text-4xl md:text-6xl text-white leading-[1.12]"
           >
-            Ready to Transform Your Space?
+            Ready to Start?
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 24 }}
@@ -330,7 +304,8 @@ export default function About() {
             transition={{ duration: 0.8, delay: 0.15 }}
             className="text-white/70 mt-6 max-w-2xl mx-auto leading-relaxed"
           >
-            Let's create something extraordinary together. Schedule a consultation to begin your design journey.
+            Send us your floor plan or a photo of the space on WhatsApp, or call
+            either number below — we'll come back with a scope and an estimate.
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 24 }}
@@ -340,14 +315,19 @@ export default function About() {
             className="flex justify-center gap-4 mt-10"
           >
             <a
-              href="/contact"
-              className="bg-white text-[#2b241d] text-sm px-7 py-3.5 rounded-l-full hover:bg-white/90 transition-colors"
+              href={whatsappLink(defaultEnquiry)}
+              target="_blank"
+              rel="noreferrer noopener"
+              className="bg-[#f5c518] text-[#2b241d] text-sm font-medium px-7 py-3.5 rounded-l-full hover:bg-[#ffd23f] transition-colors"
             >
-              Book Consultation
+              Message Us on WhatsApp
             </a>
             <a
-              href="/projects"
-              className="bg-white text-[#2b241d] px-4 py-3.5 rounded-r-full border-l border-white/15 hover:bg-white/90 transition-colors"
+              href={whatsappLink(defaultEnquiry)}
+              target="_blank"
+              rel="noreferrer noopener"
+              className="bg-[#f5c518] text-[#2b241d] px-4 py-3.5 rounded-r-full border-l border-black/10 hover:bg-[#ffd23f] transition-colors"
+              aria-label="Message us on WhatsApp"
             >
               <ChevronRight className="w-4 h-4" />
             </a>

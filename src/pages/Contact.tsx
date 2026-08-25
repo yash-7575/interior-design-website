@@ -1,64 +1,73 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Mail, Phone, MapPin, Clock, ChevronRight, Send, CheckCircle } from "lucide-react";
+import { Mail, Phone, MapPin, Clock, ChevronRight, MessageCircle, CheckCircle } from "lucide-react";
+import { business, contact, socials, whatsappLink } from "@/data/business";
 
 const contactInfo = [
   {
-    icon: Mail,
-    title: "Email Us",
-    value: "hello@eloria.com",
-    subtitle: "We respond within 24 hours",
-    link: "mailto:hello@eloria.com",
+    icon: MessageCircle,
+    title: "WhatsApp Us",
+    value: contact.whatsapp.display,
+    subtitle: "Fastest way to reach us — we reply the same day",
+    link: whatsappLink(`Hello ${business.name}, I'd like to discuss an interior project.`),
   },
   {
     icon: Phone,
     title: "Call Us",
-    value: "+1 (212) 555-0147",
-    subtitle: "Mon–Fri, 9am–6pm EST",
-    link: "tel:+12125550147",
+    value: contact.phones[0].display,
+    subtitle: `${contact.phones[0].name} · also ${contact.phones[1].display} (${contact.phones[1].name})`,
+    link: `tel:${contact.phones[0].tel}`,
+  },
+  {
+    icon: Mail,
+    title: "Email Us",
+    value: contact.email,
+    subtitle: "Send us floor plans, references or a requirement list",
+    link: `mailto:${contact.email}`,
   },
   {
     icon: MapPin,
-    title: "Visit Our Studio",
-    value: "4520 Washington Ave",
-    subtitle: "Manchester, 39495 — By appointment only",
-    link: "https://maps.google.com",
+    title: "Visit Our Office",
+    value: contact.address.line1,
+    subtitle: `${contact.address.line2} — ${contact.address.line3}`,
+    link: contact.mapsUrl,
   },
   {
     icon: Clock,
-    title: "Studio Hours",
-    value: "Mon–Fri: 9am–6pm",
-    subtitle: "Sat: 10am–4pm · Sun: Closed",
+    title: "Working Hours",
+    value: contact.hours.weekdays,
+    subtitle: contact.hours.weekend,
     link: null,
   },
 ];
 
 const projectTypes = [
-  "Full Home Renovation",
-  "Single Room Design",
-  "Commercial / Hospitality",
-  "Bespoke Furniture Only",
-  "Lighting Design",
-  "Art Curation",
-  "Renovation Management",
-  "Consultation Only",
+  "Full Home Turnkey Interior",
+  "Single Room / Partial Work",
+  "Modular Kitchen & Storage",
+  "Custom Furniture Only",
+  "Office / Commercial Fit-Out",
+  "Retail, Showroom or Restaurant",
+  "Renovation & Remodelling",
+  "False Ceiling / Civil Work Only",
+  "Not sure yet — need guidance",
 ];
 
 const budgetRanges = [
-  "Under $50,000",
-  "$50,000 – $150,000",
-  "$150,000 – $500,000",
-  "$500,000 – $1,000,000",
-  "$1,000,000+",
+  "Under ₹3 Lakh",
+  "₹3 – 7 Lakh",
+  "₹7 – 15 Lakh",
+  "₹15 – 30 Lakh",
+  "₹30 Lakh+",
   "Not sure yet",
 ];
 
 const timelines = [
-  "ASAP",
+  "Immediately",
+  "Within 1 month",
   "1–3 months",
   "3–6 months",
-  "6–12 months",
-  "12+ months",
+  "6+ months",
   "Just exploring",
 ];
 
@@ -78,13 +87,32 @@ export default function Contact() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  /**
+   * There is no backend. Enquiries are routed to the studio's WhatsApp inbox:
+   * the form fields are formatted into a message and opened via a wa.me link.
+   */
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setStatus("submitting");
-    await new Promise((r) => setTimeout(r, 1500));
+
+    const lines = [
+      `New enquiry via ${business.name} website`,
+      "",
+      `Name: ${formData.name}`,
+      `Email: ${formData.email}`,
+      formData.phone && `Phone: ${formData.phone}`,
+      `Project type: ${formData.projectType}`,
+      `Budget: ${formData.budget}`,
+      formData.timeline && `Timeline: ${formData.timeline}`,
+      "",
+      "Details:",
+      formData.message,
+    ].filter(Boolean) as string[];
+
+    window.open(whatsappLink(lines.join("\n")), "_blank", "noopener,noreferrer");
+
     setStatus("success");
     setFormData({ name: "", email: "", phone: "", projectType: "", budget: "", timeline: "", message: "" });
-    setTimeout(() => setStatus("idle"), 5000);
   };
 
   return (
@@ -107,9 +135,9 @@ export default function Contact() {
             transition={{ duration: 0.9, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
             className="font-serif-display text-white text-5xl md:text-7xl leading-[1.08] max-w-3xl"
           >
-            Let's Start Your
+            Let&rsquo;s Plan Your
             <br />
-            Design Journey
+            Interior Project
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 24 }}
@@ -117,7 +145,8 @@ export default function Contact() {
             transition={{ duration: 0.8, delay: 0.55 }}
             className="text-white/75 text-sm md:text-base mt-6 max-w-md leading-relaxed"
           >
-            Every great project begins with a conversation. Tell us about your vision.
+            Tell us about the space and we&rsquo;ll come back with a scope and an
+            itemised estimate.
           </motion.p>
         </div>
       </section>
@@ -137,8 +166,9 @@ export default function Contact() {
                 Get in Touch
               </h2>
               <p className="text-[#6b6156] mt-6 leading-relaxed text-[15px] max-w-md">
-                We'd love to hear about your project. Fill out the form or reach out directly —
-                we'll be in touch within 24 hours to schedule a complimentary consultation.
+                WhatsApp is the quickest way to reach us — send a photo of the space
+                or your floor plan and we&rsquo;ll take it from there. You can also call
+                either number below or drop us an email.
               </p>
 
               <div className="mt-12 space-y-8">
@@ -172,13 +202,15 @@ export default function Contact() {
               <div className="mt-16 pt-8 border-t border-[#e2d9c8]">
                 <p className="text-xs tracking-[0.3em] text-[#6b5b4a] font-medium mb-4">FOLLOW US</p>
                 <div className="flex gap-4">
-                  {["Instagram", "Pinterest", "LinkedIn", "Houzz"].map((social) => (
+                  {socials.map((social) => (
                     <a
-                      key={social}
-                      href="#"
-                      className="w-10 h-10 rounded-full border border-[#d8cebc] flex items-center justify-center text-[#6b6156] hover:bg-[#33291f] hover:border-[#33291f] hover:text-white transition-all"
+                      key={social.label}
+                      href={social.url}
+                      target="_blank"
+                      rel="noreferrer noopener"
+                      className="text-sm text-[#6b6156] hover:text-[#2b241d] underline underline-offset-4 transition-colors"
                     >
-                      {social[0]}
+                      {social.label}
                     </a>
                   ))}
                 </div>
@@ -194,7 +226,7 @@ export default function Contact() {
               className="bg-white rounded-2xl p-6 md:p-10 shadow-xl shadow-black/5"
             >
               <h3 className="font-serif-display text-2xl md:text-3xl text-[#2b241d] mb-8">
-                Book a Consultation
+                Send Us Your Requirement
               </h3>
 
               {status === "success" ? (
@@ -204,13 +236,26 @@ export default function Contact() {
                   className="text-center py-12"
                 >
                   <CheckCircle className="w-16 h-16 text-[#33291f] mx-auto mb-4" />
-                  <h4 className="font-serif-display text-2xl text-[#2b241d] mb-2">Message Sent!</h4>
-                  <p className="text-[#6b6156]">Thank you for reaching out. We'll be in touch within 24 hours to schedule your consultation.</p>
+                  <h4 className="font-serif-display text-2xl text-[#2b241d] mb-2">WhatsApp Opened</h4>
+                  <p className="text-[#6b6156]">
+                    Your enquiry is ready in WhatsApp — press send there and we&rsquo;ll
+                    reply the same day. If the chat didn&rsquo;t open, message us
+                    directly at{" "}
+                    <a
+                      href={whatsappLink()}
+                      target="_blank"
+                      rel="noreferrer noopener"
+                      className="underline font-medium text-[#2b241d]"
+                    >
+                      {contact.whatsapp.display}
+                    </a>
+                    .
+                  </p>
                   <button
                     onClick={() => setStatus("idle")}
                     className="mt-6 text-sm font-medium text-[#33291f] hover:text-[#241c14] underline"
                   >
-                    Send Another Message
+                    Send Another Enquiry
                   </button>
                 </motion.div>
               ) : (
@@ -228,7 +273,7 @@ export default function Contact() {
                         onChange={handleChange}
                         required
                         className="w-full px-4 py-3 bg-[#faf7f1] border border-[#e2d9c8] rounded-lg text-[#2b241d] placeholder-[#a89a83] focus:outline-none focus:ring-2 focus:ring-[#33291f] focus:border-transparent transition-all"
-                        placeholder="John Smith"
+                        placeholder="Your full name"
                       />
                     </div>
                     <div>
@@ -243,7 +288,7 @@ export default function Contact() {
                         onChange={handleChange}
                         required
                         className="w-full px-4 py-3 bg-[#faf7f1] border border-[#e2d9c8] rounded-lg text-[#2b241d] placeholder-[#a89a83] focus:outline-none focus:ring-2 focus:ring-[#33291f] focus:border-transparent transition-all"
-                        placeholder="john@example.com"
+                        placeholder="you@example.com"
                       />
                     </div>
                     <div>
@@ -257,7 +302,7 @@ export default function Contact() {
                         value={formData.phone}
                         onChange={handleChange}
                         className="w-full px-4 py-3 bg-[#faf7f1] border border-[#e2d9c8] rounded-lg text-[#2b241d] placeholder-[#a89a83] focus:outline-none focus:ring-2 focus:ring-[#33291f] focus:border-transparent transition-all"
-                        placeholder="+1 (555) 000-0000"
+                        placeholder="+91 98765 43210"
                       />
                     </div>
                     <div>
@@ -337,14 +382,14 @@ export default function Contact() {
                       required
                       rows={5}
                       className="w-full px-4 py-3 bg-[#faf7f1] border border-[#e2d9c8] rounded-lg text-[#2b241d] placeholder-[#a89a83] focus:outline-none focus:ring-2 focus:ring-[#33291f] focus:border-transparent transition-all resize-none"
-                      placeholder="Tell us about your vision, style preferences, must-haves, and any specific requirements..."
+                      placeholder="Tell us about the space — flat or office, carpet area, location in Pune, what work is needed, and when you'd like to start..."
                     />
                   </div>
 
                   <button
                     type="submit"
                     disabled={status === "submitting"}
-                    className="w-full flex items-center justify-center gap-3 bg-[#33291f] text-white text-sm px-7 py-3.5 rounded-full hover:bg-[#241c14] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full flex items-center justify-center gap-3 bg-[#f5c518] text-[#2b241d] text-sm font-medium px-7 py-3.5 rounded-full hover:bg-[#ffd23f] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     {status === "submitting" ? (
                       <>
@@ -352,22 +397,19 @@ export default function Contact() {
                           <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
                           <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
                         </svg>
-                        Sending...
+                        Opening WhatsApp...
                       </>
                     ) : (
                       <>
-                        Submit Inquiry
-                        <Send className="w-4 h-4" />
+                        Send Enquiry on WhatsApp
+                        <MessageCircle className="w-4 h-4" />
                       </>
                     )}
                   </button>
 
                   <p className="text-center text-xs text-[#a89a83]">
-                    By submitting, you agree to our{" "}
-                    <a href="#" className="underline hover:text-[#33291f]">Privacy Policy</a>
-                    {" "}and{" "}
-                    <a href="#" className="underline hover:text-[#33291f]">Terms of Service</a>
-                    .
+                    This opens WhatsApp with your details pre-filled — nothing is sent
+                    until you press send there.
                   </p>
                 </form>
               )}
@@ -395,28 +437,32 @@ export default function Contact() {
           <div className="max-w-3xl mx-auto space-y-4">
             {[
               {
-                q: "What does the initial consultation involve?",
-                a: "A complimentary 60-minute meeting (virtual or in-studio) where we discuss your project scope, timeline, budget, and aesthetic vision. We'll share our process and answer all your questions.",
+                q: "What does 'turnkey' actually include?",
+                a: "Everything between an empty space and a finished one — layout and 3D design, civil and ceiling work, electrical and plumbing, carpentry and modular furniture, painting and polishing, right through to final cleaning and handover. One quotation, one schedule, one team answerable for the result.",
               },
               {
-                q: "How do you charge for design services?",
-                a: "We offer both flat-fee and hourly structures depending on project scope. Full-service design typically starts at a design fee plus procurement markup. We provide transparent pricing before any commitment.",
+                q: "Do you manufacture the furniture yourselves?",
+                a: "Yes. Modular kitchens, wardrobes and custom furniture are built in our own facility rather than outsourced, which keeps the finish consistent and the delivery timeline under our control.",
               },
               {
-                q: "What's the typical project timeline?",
-                a: "Residential projects range from 4–18 months depending on scope. New builds and major renovations take longer than single-room refreshes. We provide a detailed timeline during the proposal phase.",
+                q: "Which areas do you work in?",
+                a: "Pune and the surrounding Maharashtra regions. Our office is in Ambegaon Budruk, and we regularly execute projects across the city and nearby areas.",
               },
               {
-                q: "Do you work remotely or only locally?",
-                a: "We work globally. While our studio is in Manchester, we manage projects worldwide with regular site visits, virtual reviews, and local vendor coordination. Distance is never a barrier to exceptional design.",
+                q: "How is the project costed?",
+                a: "After a site visit and requirement discussion we share an itemised quotation broken down by trade — carpentry, ceiling, electrical, plumbing, painting and so on. You can see what each element costs and adjust the scope before any work begins.",
               },
               {
-                q: "Can we purchase furniture through you?",
-                a: "Yes. We have access to trade-only showrooms, artisan workshops, and vintage dealers worldwide. Clients benefit from our buying power, curation expertise, and seamless logistics management.",
+                q: "Can you take on only part of the work?",
+                a: "Yes. Plenty of clients come to us for a modular kitchen, a false ceiling, aluminium windows or a single room. Turnkey is what we are known for, but individual trades are available on their own.",
               },
               {
-                q: "What if we already have an architect/contractor?",
-                a: "We collaborate seamlessly with your existing team. Early integration yields the best results — we coordinate lighting, millwork, and finish selections directly with your architect and builder.",
+                q: "How long does a typical project take?",
+                a: "It depends on scope and site conditions. A modular kitchen or a single room is usually a few weeks; a full home turnkey project generally runs two to four months. We commit to a schedule in writing before starting.",
+              },
+              {
+                q: "Do you follow Vastu requirements?",
+                a: "We do. Vastu Shastra and space harmonisation consultation is part of our planning stage, and we work your requirements into the layout from the beginning rather than adjusting afterwards.",
               },
             ].map((faq, i) => (
               <motion.details
@@ -459,7 +505,8 @@ export default function Contact() {
             transition={{ duration: 0.8, delay: 0.15 }}
             className="text-white/70 mt-6 max-w-2xl mx-auto leading-relaxed"
           >
-            Your dream space is one conversation away. Let's create something extraordinary together.
+            Send us your requirement on WhatsApp and we&rsquo;ll get back to you with
+            a scope and an estimate.
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 24 }}
@@ -469,14 +516,19 @@ export default function Contact() {
             className="flex justify-center gap-4 mt-10"
           >
             <a
-              href="#"
-              className="bg-white text-[#2b241d] text-sm px-7 py-3.5 rounded-l-full hover:bg-white/90 transition-colors"
+              href={whatsappLink(`Hello ${business.name}, I'd like to discuss an interior project.`)}
+              target="_blank"
+              rel="noreferrer noopener"
+              className="bg-[#f5c518] text-[#2b241d] text-sm font-medium px-7 py-3.5 rounded-l-full hover:bg-[#ffd23f] transition-colors"
             >
-              Schedule Consultation
+              Message Us on WhatsApp
             </a>
             <a
-              href="/projects"
-              className="bg-white text-[#2b241d] px-4 py-3.5 rounded-r-full border-l border-white/15 hover:bg-white/90 transition-colors"
+              href={whatsappLink(`Hello ${business.name}, I'd like to discuss an interior project.`)}
+              target="_blank"
+              rel="noreferrer noopener"
+              className="bg-[#f5c518] text-[#2b241d] px-4 py-3.5 rounded-r-full border-l border-black/10 hover:bg-[#ffd23f] transition-colors"
+              aria-label="Message us on WhatsApp"
             >
               <ChevronRight className="w-4 h-4" />
             </a>

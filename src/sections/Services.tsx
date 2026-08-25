@@ -25,8 +25,8 @@ export default function Services() {
           transition={{ duration: 0.8 }}
         >
           <h2 className="font-serif-display text-4xl md:text-6xl text-[#2b241d] leading-[1.12]">
-            Curate, Design &<br />
-            Elevate with Aethel
+            Design, Manufacture<br />
+            &amp; Execute — In-House
           </h2>
 
           <ul className="mt-12 space-y-1">
@@ -52,15 +52,15 @@ export default function Services() {
 
           <div className="flex mt-12">
             <a
-              href="#listings"
+              href="/services"
               className="bg-[#33291f] text-white text-sm px-7 py-3.5 rounded-l-full hover:bg-[#241c14] transition-colors"
             >
-              See All Project
+              All 25 Services
             </a>
             <a
-              href="#listings"
+              href="/services"
               className="bg-[#33291f] text-white px-4 py-3.5 rounded-r-full border-l border-white/15 hover:bg-[#241c14] transition-colors"
-              aria-label="See all projects"
+              aria-label="See all services"
             >
               <ChevronRight className="w-4 h-4" />
             </a>

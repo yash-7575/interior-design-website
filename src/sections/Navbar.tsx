@@ -1,13 +1,15 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, ArrowUpRight } from "lucide-react";
+import { Menu, X, ArrowUpRight, MessageCircle } from "lucide-react";
+import Logo from "@/components/Logo";
+import { business, whatsappLink, defaultEnquiry } from "@/data/business";
 
 const menuItems = [
   { label: "Home", path: "/" },
   { label: "Projects", path: "/projects" },
-  { label: "About Studio", path: "/about" },
-  { label: "Design Services", path: "/services" },
+  { label: "About Us", path: "/about" },
+  { label: "Services", path: "/services" },
   { label: "Journal", path: "/journal" },
   { label: "Contact", path: "/contact" },
 ];
@@ -27,22 +29,29 @@ export default function Navbar() {
           <span className="text-sm tracking-wide">Menu</span>
         </button>
 
-        <Link to="/" className="absolute left-1/2 -translate-x-1/2 flex items-center gap-2">
-          <svg viewBox="0 0 24 24" className="w-6 h-6 text-white" fill="none" stroke="currentColor" strokeWidth="1.6">
-            <circle cx="12" cy="12" r="9" />
-            <path d="M12 3a9 9 0 0 1 0 18" strokeLinecap="round" />
-            <circle cx="12" cy="12" r="3.5" />
-          </svg>
-          <span className="font-serif-display text-white text-xl tracking-[0.25em] font-medium">ELORIA</span>
+        <Link to="/" className="absolute left-1/2 -translate-x-1/2" aria-label={`${business.name} home`}>
+          <Logo />
         </Link>
 
         <div className="flex items-center gap-2">
-          <Link
-            to="/contact"
-            className="bg-white text-[#2b241d] text-sm px-5 py-2.5 rounded-md hover:bg-white/90 transition-colors"
+          <a
+            href={whatsappLink(defaultEnquiry)}
+            target="_blank"
+            rel="noreferrer noopener"
+            className="hidden sm:flex items-center gap-2 bg-[#f5c518] text-[#2b241d] text-sm font-medium px-5 py-2.5 rounded-md hover:bg-[#ffd23f] transition-colors"
           >
-            Contact Us
-          </Link>
+            <MessageCircle className="w-4 h-4" />
+            WhatsApp Us
+          </a>
+          <a
+            href={whatsappLink(defaultEnquiry)}
+            target="_blank"
+            rel="noreferrer noopener"
+            className="sm:hidden bg-[#f5c518] text-[#2b241d] p-2.5 rounded-md hover:bg-[#ffd23f] transition-colors"
+            aria-label="Enquire on WhatsApp"
+          >
+            <MessageCircle className="w-4 h-4" />
+          </a>
           <Link
             to="/contact"
             className="bg-white text-[#2b241d] p-2.5 rounded-md hover:bg-white/90 transition-colors"
@@ -63,7 +72,7 @@ export default function Navbar() {
             className="fixed inset-0 z-50 bg-[#221b14]/97 backdrop-blur-sm flex flex-col"
           >
             <div className="flex items-center justify-between px-6 md:px-10 py-6">
-              <span className="font-serif-display text-white text-xl tracking-[0.25em]">ELORIA</span>
+              <Logo />
               <button
                 onClick={() => setOpen(false)}
                 className="text-white/80 hover:text-white transition-colors"
@@ -93,7 +102,9 @@ export default function Navbar() {
                 </motion.div>
               ))}
             </nav>
-            <p className="text-center text-white/40 text-xs tracking-widest pb-8">@2026 ELORIA — TIMELESS INTERIORS</p>
+            <p className="text-center text-white/40 text-xs tracking-widest pb-8">
+              {business.name.toUpperCase()} — PUNE
+            </p>
           </motion.div>
         )}
       </AnimatePresence>

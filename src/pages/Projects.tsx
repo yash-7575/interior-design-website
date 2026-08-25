@@ -1,102 +1,111 @@
 import { motion } from "framer-motion";
 import { ChevronRight, MapPin, Search, Filter } from "lucide-react";
+import { business, whatsappLink } from "@/data/business";
 
+// TODO: replace with MegaDream's own project photographs and details once the
+// client uploads them. Names, areas and locations below are representative of
+// the studio's Pune work and should be confirmed before launch.
 const allProjects = [
   {
     id: 1,
-    name: "Coastal Modern Villa",
-    location: "Malibu, CA",
+    name: "3 BHK Turnkey Interior",
+    location: "Ambegaon Budruk, Pune",
     category: "Residential",
-    price: "$2.4M",
-    image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&h=1000&fit=crop",
-    images: [
-      "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&h=1000&fit=crop",
-      "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&h=1000&fit=crop",
-      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&h=1000&fit=crop",
-    ],
-    description: "A stunning cliffside residence overlooking the Pacific. Floor-to-ceiling windows frame the ocean while natural stone and warm woods ground the contemporary architecture.",
-    year: 2024,
-    size: "6,200 sq ft",
-  },
-  {
-    id: 2,
-    name: "Manhattan Penthouse",
-    location: "New York, NY",
-    category: "Residential",
-    price: "$3.1M",
+    scope: "Turnkey execution",
     image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&h=1000&fit=crop",
     images: [
       "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&h=1000&fit=crop",
-      "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&h=1000&fit=crop",
       "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&h=1000&fit=crop",
-    ],
-    description: "Triplex penthouse on Central Park West. Custom millwork, curated art collection, and a private terrace with skyline views define this urban sanctuary.",
-    year: 2023,
-    size: "4,800 sq ft",
-  },
-  {
-    id: 3,
-    name: "Boutique Hotel Lobby",
-    location: "Charleston, SC",
-    category: "Hospitality",
-    price: "$850K",
-    image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&h=1000&fit=crop",
-    images: [
       "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&h=1000&fit=crop",
-      "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&h=1000&fit=crop",
     ],
-    description: "Historic building restoration with contemporary luxury. Hand-painted wallcoverings, bespoke lighting, and locally sourced furnishings honor the property's heritage.",
-    year: 2024,
-    size: "3,200 sq ft",
+    description:
+      "Complete home execution — civil modifications, gypsum false ceiling, full electrical rework, in-house modular kitchen and wardrobes, painting and polishing, handed over ready to move in.",
+    year: 2025,
+    size: "1,250 sq ft",
   },
   {
-    id: 4,
-    name: "Mountain Retreat",
-    location: "Aspen, CO",
-    category: "Residential",
-    price: "$1.9M",
-    image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&h=1000&fit=crop",
-    images: [
-      "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&h=1000&fit=crop",
-      "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&h=1000&fit=crop",
-    ],
-    description: "Ski-in/ski-out chalet blending rustic warmth with refined elegance. Reclaimed timber, stone fireplaces, and floor-to-ceiling glazing capture mountain vistas.",
-    year: 2022,
-    size: "5,100 sq ft",
-  },
-  {
-    id: 5,
-    name: "Corporate Headquarters",
-    location: "San Francisco, CA",
+    id: 2,
+    name: "Corporate Office Fit-Out",
+    location: "Katraj, Pune",
     category: "Commercial",
-    price: "$1.2M",
+    scope: "Office fit-out",
     image: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&h=1000&fit=crop",
     images: [
       "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&h=1000&fit=crop",
       "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&h=1000&fit=crop",
     ],
-    description: "Tech campus executive suite and collaborative spaces. Biophilic design, acoustic excellence, and flexible work environments for modern leadership.",
-    year: 2023,
-    size: "8,500 sq ft",
+    description:
+      "Workstations, cabin partitions, toughened glass glazing and acoustic grid ceiling, executed in phases around the client's working hours so the office never shut down.",
+    year: 2025,
+    size: "3,400 sq ft",
+  },
+  {
+    id: 3,
+    name: "Modular Kitchen & Utility",
+    location: "Dhankawadi, Pune",
+    category: "Modular",
+    scope: "Modular manufacturing",
+    image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&h=1000&fit=crop",
+    images: [
+      "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&h=1000&fit=crop",
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&h=1000&fit=crop",
+    ],
+    description:
+      "Tall units, corner carousels and a matching utility run, manufactured in our own facility and installed with the plumbing and electrical points planned around the layout.",
+    year: 2024,
+    size: "180 sq ft",
+  },
+  {
+    id: 4,
+    name: "Apartment Renovation",
+    location: "Narhe, Pune",
+    category: "Renovation",
+    scope: "Remodelling",
+    image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&h=1000&fit=crop",
+    images: [
+      "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&h=1000&fit=crop",
+      "https://images.unsplash.com/photo-1581539250439-c96689b516dd?w=800&h=1000&fit=crop",
+    ],
+    description:
+      "A fifteen-year-old flat taken back to shell — retiling, replumbing, new bathroom fittings, fresh electricals and a reworked layout that opened the kitchen into the living area.",
+    year: 2024,
+    size: "980 sq ft",
+  },
+  {
+    id: 5,
+    name: "Showroom Interior",
+    location: "Kondhwa, Pune",
+    category: "Commercial",
+    scope: "Retail fit-out",
+    image: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&h=1000&fit=crop",
+    images: [
+      "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&h=1000&fit=crop",
+      "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&h=1000&fit=crop",
+    ],
+    description:
+      "Display joinery, ACP panel cladding on the facade, cove lighting and vitrified flooring — built to take daily footfall and finished in under six weeks.",
+    year: 2025,
+    size: "2,100 sq ft",
   },
   {
     id: 6,
-    name: "Historic Townhouse",
-    location: "London, UK",
+    name: "Master Bedroom & Wardrobes",
+    location: "Ambegaon Budruk, Pune",
     category: "Residential",
-    price: "$2.8M",
+    scope: "Custom furniture",
     image: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=800&h=1000&fit=crop",
     images: [
       "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=800&h=1000&fit=crop",
-      "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&h=1000&fit=crop",
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&h=1000&fit=crop",
     ],
-    description: "Grade II listed Georgian townhouse in Mayfair. Painstaking restoration meets contemporary luxury — original cornices, modern amenities, private garden.",
+    description:
+      "Floor-to-ceiling sliding wardrobes, a bed with hydraulic storage and a dresser unit, all manufactured in-house with matching laminates and soft-close hardware.",
     year: 2024,
-    size: "4,200 sq ft",
+    size: "320 sq ft",
   },
 ];
 
-const categories = ["All", "Residential", "Hospitality", "Commercial"];
+const categories = ["All", "Residential", "Commercial", "Modular", "Renovation"];
 
 function ProjectCard({
   project,
@@ -131,7 +140,9 @@ function ProjectCard({
         <h3 className="font-serif-display text-xl md:text-2xl text-[#2b241d] group-hover:text-[#6b5b4a] transition-colors">
           {project.name}
         </h3>
-        <p className="font-serif-display text-lg text-[#2b241d] mt-2">{project.price}</p>
+        <p className="text-xs tracking-wider uppercase text-[#8a7d6c] mt-2">
+          {project.scope} &middot; {project.size}
+        </p>
       </div>
     </motion.div>
   );
@@ -144,7 +155,7 @@ export default function Projects() {
       <section className="relative h-[50vh] min-h-[400px] overflow-hidden">
         <motion.img
           src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1920&q=80"
-          alt="Luxury interior project showcase"
+          alt="Completed interior project in Pune"
           className="absolute inset-0 w-full h-full object-cover"
           initial={{ scale: 1.12 }}
           animate={{ scale: 1 }}
@@ -168,7 +179,8 @@ export default function Projects() {
             transition={{ duration: 0.8, delay: 0.55 }}
             className="text-white/75 text-sm md:text-base mt-6 max-w-md leading-relaxed"
           >
-            Explore our curated collection of luxury residential, hospitality, and commercial projects worldwide.
+            Residential, commercial and modular work delivered across Pune and
+            surrounding Maharashtra.
           </motion.p>
         </div>
       </section>
@@ -264,21 +276,27 @@ export default function Projects() {
             >
               <p className="text-xs tracking-[0.3em] text-[#8a7d6c] font-medium">FEATURED PROJECT</p>
               <h2 className="font-serif-display text-4xl md:text-6xl text-white leading-[1.12] mt-6">
-                Coastal Modern Villa — Malibu
+                3 BHK Turnkey Interior &mdash; Ambegaon Budruk
               </h2>
               <p className="text-white/70 mt-6 leading-relaxed text-[15px] max-w-lg">
-                A stunning cliffside residence overlooking the Pacific. Floor-to-ceiling windows frame the ocean while natural stone and warm woods ground the contemporary architecture.
+                Complete home execution — civil modifications, gypsum false ceiling,
+                full electrical rework, in-house modular kitchen and wardrobes, painting
+                and polishing, handed over ready to move in.
               </p>
               <div className="flex flex-wrap gap-4 mt-8 text-white/70 text-sm">
-                <span>2024 · 6,200 sq ft</span>
+                <span>2025 &middot; 1,250 sq ft</span>
                 <span>Residential</span>
-                <span>$2.4M</span>
+                <span>Turnkey execution</span>
               </div>
               <a
-                href="#"
+                href={whatsappLink(
+                  `Hello ${business.name}, I'd like to know more about your turnkey interior projects.`,
+                )}
+                target="_blank"
+                rel="noreferrer noopener"
                 className="inline-flex items-center gap-2 mt-8 text-white hover:text-white/80 transition-colors"
               >
-                View Full Case Study
+                Ask About This Project
                 <ChevronRight className="w-4 h-4" />
               </a>
             </motion.div>
@@ -292,7 +310,7 @@ export default function Projects() {
             >
               <img
                 src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&h=1000&fit=crop"
-                alt="Coastal Modern Villa interior"
+                alt="3 BHK turnkey interior in Ambegaon Budruk"
                 className="absolute inset-0 w-full h-full object-cover hover:scale-105 transition-transform duration-700"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />

@@ -79,7 +79,9 @@ export default function FeaturedSlider() {
                     ))}
                   </div>
                 </div>
-                <span className="font-serif-display text-xl text-[#2b241d]">{current.price}</span>
+                <span className="text-xs tracking-wider uppercase text-[#8a7d6c] text-right leading-relaxed">
+                  {current.scope}
+                </span>
               </div>
             </motion.div>
           </AnimatePresence>

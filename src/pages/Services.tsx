@@ -1,82 +1,11 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, ChevronRight, Check } from "lucide-react";
-
-const serviceCategories = [
-  {
-    id: "residential",
-    title: "Residential Design",
-    description: "Full-service interior design for luxury homes — from concept development through final installation. New builds, renovations, and historic restorations.",
-    image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&h=600&fit=crop",
-    features: ["Space planning & layout optimization", "Custom millwork & built-ins", "Furniture procurement & styling", "Lighting design & specification", "Art curation & placement", "Project management & oversight"],
-  },
-  {
-    id: "commercial",
-    title: "Commercial Spaces",
-    description: "Elevated workplace and hospitality environments that reflect brand identity while enhancing productivity and guest experience.",
-    image: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&h=600&fit=crop",
-    features: ["Executive suite design", "Collaborative workspace strategy", "Boutique hotel & restaurant interiors", "Retail & showroom design", "Wellness & amenity spaces", "Brand-aligned material palettes"],
-  },
-  {
-    id: "bespoke",
-    title: "Bespoke Furniture",
-    description: "One-of-a-kind furniture pieces designed and crafted exclusively for your space. Heirloom-quality, made by master artisans.",
-    image: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&h=600&fit=crop",
-    features: ["Custom sofas & seating", "Dining & conference tables", "Casegoods & storage solutions", "Upholstery in curated fabrics", "Metalwork & stone detailing", "Limited edition collections"],
-  },
-  {
-    id: "lighting",
-    title: "Lighting Curation",
-    description: "Architectural and decorative lighting design that transforms atmosphere. Technical precision meets artistic vision.",
-    image: "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=800&h=600&fit=crop",
-    features: ["Lighting master plans", "Custom fixture design", "Smart lighting integration", "Art & display lighting", "Outdoor & landscape lighting", "Energy-efficient specifications"],
-  },
-  {
-    id: "art",
-    title: "Art & Decor",
-    description: "Curated art collections and decorative objects that personalize and elevate your interiors. Access to emerging and established artists.",
-    image: "https://images.unsplash.com/photo-1578301978593-12a6334f6812?w=800&h=600&fit=crop",
-    features: ["Art advisory & acquisition", "Custom framing & installation", "Sculpture & object placement", "Textile & rug sourcing", "Vintage & antique procurement", "Commissioned artwork coordination"],
-  },
-  {
-    id: "renovation",
-    title: "Renovation Management",
-    description: "End-to-end project management for complex renovations. We coordinate architects, contractors, and trades for seamless execution.",
-    image: "https://images.unsplash.com/photo-1581539250439-c96689b516dd?w=800&h=600&fit=crop",
-    features: ["Budget development & tracking", "Contractor selection & bidding", "Construction administration", "Timeline management", "Quality control inspections", "Move-in coordination"],
-  },
-];
-
-const processSteps = [
-  {
-    num: "01",
-    title: "Discovery & Vision",
-    desc: "We begin with an in-depth consultation to understand your lifestyle, aesthetic preferences, and functional needs. Site analysis and feasibility assessment follow.",
-  },
-  {
-    num: "02",
-    title: "Concept Development",
-    desc: "Mood boards, space plans, and preliminary renderings bring the vision to life. Material palettes and furniture concepts are presented for your feedback.",
-  },
-  {
-    num: "03",
-    title: "Design Refinement",
-    desc: "Detailed drawings, specifications, and 3D visualizations finalize every decision. Custom pieces are designed; vendors and artisans are selected.",
-  },
-  {
-    num: "04",
-    title: "Procurement & Production",
-    desc: "We manage all ordering, fabrication, and delivery logistics. Custom items enter production; lead times are tracked meticulously.",
-  },
-  {
-    num: "05",
-    title: "Installation & Reveal",
-    desc: "Our team orchestrates the final installation — furniture placement, art hanging, styling, and the walkthrough. Your vision, realized.",
-  },
-];
+import { serviceGroups as serviceCategories, allServices, processSteps } from "@/data/services";
+import { business, whatsappLink, defaultEnquiry } from "@/data/business";
 
 export default function Services() {
-  const [active, setActive] = useState("residential");
+  const [active, setActive] = useState(serviceCategories[0].id);
 
   const activeService = serviceCategories.find((s) => s.id === active) || serviceCategories[0];
 
@@ -100,9 +29,9 @@ export default function Services() {
             transition={{ duration: 0.9, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
             className="font-serif-display text-white text-5xl md:text-7xl leading-[1.08] max-w-3xl"
           >
-            Design Services
+            25 Services,
             <br />
-            Tailored to You
+            One Team
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 24 }}
@@ -110,7 +39,8 @@ export default function Services() {
             transition={{ duration: 0.8, delay: 0.55 }}
             className="text-white/75 text-sm md:text-base mt-6 max-w-md leading-relaxed"
           >
-            From concept to completion, we offer comprehensive interior design services for discerning clients worldwide.
+            Every trade a complete interior needs — design, manufacturing, civil work
+            and services — handled in-house across Pune.
           </motion.p>
         </div>
       </section>
@@ -126,8 +56,8 @@ export default function Services() {
             transition={{ duration: 0.8 }}
           >
             <h2 className="font-serif-display text-4xl md:text-6xl text-[#2b241d] leading-[1.12]">
-              Curate, Design &<br />
-              Elevate with Eloria
+              Design, Manufacture<br />
+              &amp; Execute &mdash; In-House
             </h2>
 
             <ul className="mt-12 space-y-1">
@@ -153,15 +83,19 @@ export default function Services() {
 
             <div className="flex mt-12">
               <a
-                href="/contact"
-                className="bg-[#33291f] text-white text-sm px-7 py-3.5 rounded-l-full hover:bg-[#241c14] transition-colors"
+                href={whatsappLink(defaultEnquiry)}
+                target="_blank"
+                rel="noreferrer noopener"
+                className="bg-[#f5c518] text-[#2b241d] text-sm font-medium px-7 py-3.5 rounded-l-full hover:bg-[#ffd23f] transition-colors"
               >
                 Start a Project
               </a>
               <a
-                href="/contact"
-                className="bg-[#33291f] text-white px-4 py-3.5 rounded-r-full border-l border-white/15 hover:bg-[#241c14] transition-colors"
-                aria-label="Start a project"
+                href={whatsappLink(defaultEnquiry)}
+                target="_blank"
+                rel="noreferrer noopener"
+                className="bg-[#f5c518] text-[#2b241d] px-4 py-3.5 rounded-r-full border-l border-black/10 hover:bg-[#ffd23f] transition-colors"
+                aria-label="Start a project on WhatsApp"
               >
                 <ChevronRight className="w-4 h-4" />
               </a>
@@ -200,7 +134,7 @@ export default function Services() {
               </div>
               <div className="py-6">
                 <h4 className="text-sm font-medium text-[#a89a83] tracking-wide mb-4">What's Included</h4>
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 gap-3">
                   {activeService.features.map((feature, i) => (
                     <motion.div
                       key={feature}
@@ -208,9 +142,9 @@ export default function Services() {
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true, margin: "-40px" }}
                       transition={{ duration: 0.4, delay: i * 0.05 }}
-                      className="flex items-center gap-3 text-[#6b6156] text-sm"
+                      className="flex items-start gap-3 text-[#6b6156] text-sm"
                     >
-                      <Check className="w-4 h-4 text-[#33291f] flex-shrink-0" />
+                      <Check className="w-4 h-4 text-[#33291f] flex-shrink-0 mt-0.5" />
                       {feature}
                     </motion.div>
                   ))}
@@ -231,9 +165,9 @@ export default function Services() {
             transition={{ duration: 0.8 }}
             className="text-center max-w-3xl mx-auto mb-20"
           >
-            <p className="text-xs tracking-[0.3em] text-[#6b5b4a] font-medium">ALL SERVICES</p>
+            <p className="text-xs tracking-[0.3em] text-[#6b5b4a] font-medium">WHAT WE HANDLE</p>
             <h2 className="font-serif-display text-4xl md:text-6xl text-[#2b241d] leading-[1.12] mt-6">
-              Comprehensive Design Expertise
+              Six Disciplines, Twenty-Five Capabilities
             </h2>
           </motion.div>
 
@@ -262,13 +196,57 @@ export default function Services() {
                 <div className="p-6">
                   <p className="text-[#6b6156] text-sm leading-relaxed mb-6">{service.description}</p>
                   <a
-                    href={`/contact?service=${service.id}`}
+                    href={whatsappLink(
+                      `Hello ${business.name}, I'd like to enquire about ${service.title}.`,
+                    )}
+                    target="_blank"
+                    rel="noreferrer noopener"
                     className="inline-flex items-center gap-2 text-sm font-medium text-[#33291f] hover:text-[#241c14] transition-colors"
                   >
-                    Learn More
+                    Enquire on WhatsApp
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </a>
                 </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Full capability list */}
+      <section className="bg-[#f6f2ea] px-6 md:px-10 py-24 md:py-32">
+        <div className="max-w-[1400px] mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.8 }}
+            className="max-w-3xl mb-16"
+          >
+            <p className="text-xs tracking-[0.3em] text-[#6b5b4a] font-medium">FULL SERVICE LIST</p>
+            <h2 className="font-serif-display text-4xl md:text-6xl text-[#2b241d] leading-[1.12] mt-6">
+              Everything We Execute
+            </h2>
+            <p className="text-[#6b6156] mt-6 leading-relaxed text-[15px]">
+              Take the whole project or any single trade — each of these is available
+              on its own.
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-1">
+            {allServices.map((service, i) => (
+              <motion.div
+                key={service}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ duration: 0.45, delay: (i % 9) * 0.04 }}
+                className="flex items-baseline gap-4 py-4 border-b border-[#e2d9c8]"
+              >
+                <span className="text-xs text-[#a89a83] font-medium tabular-nums shrink-0">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <span className="text-[#2b241d] text-sm leading-relaxed">{service}</span>
               </motion.div>
             ))}
           </div>
@@ -287,14 +265,15 @@ export default function Services() {
           >
             <p className="text-xs tracking-[0.3em] text-[#6b5b4a] font-medium">OUR PROCESS</p>
             <h2 className="font-serif-display text-4xl md:text-6xl text-[#2b241d] leading-[1.12] mt-6">
-              From Vision to Reality
+              From Site Visit to Handover
             </h2>
             <p className="text-[#6b6156] mt-6 leading-relaxed text-[15px]">
-              A proven five-phase approach ensures every project is delivered on time, on budget, and beyond expectations.
+              A six-stage process with a written scope and an itemised quotation before
+              any work begins, so you know what is happening at every stage.
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
             {processSteps.map((step, i) => (
               <motion.div
                 key={step.num}
@@ -326,7 +305,7 @@ export default function Services() {
             transition={{ duration: 0.8 }}
             className="font-serif-display text-4xl md:text-6xl text-white leading-[1.12]"
           >
-            Let's Begin Your Project
+            Let&rsquo;s Begin Your Project
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 24 }}
@@ -335,7 +314,8 @@ export default function Services() {
             transition={{ duration: 0.8, delay: 0.15 }}
             className="text-white/70 mt-6 max-w-2xl mx-auto leading-relaxed"
           >
-            Ready to transform your space? Schedule a complimentary consultation to discuss your vision.
+            Send us the floor plan or a photo of the space and we&rsquo;ll come back
+            with a scope and an itemised estimate.
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 24 }}
@@ -345,14 +325,19 @@ export default function Services() {
             className="flex justify-center gap-4 mt-10"
           >
             <a
-              href="/contact"
-              className="bg-white text-[#2b241d] text-sm px-7 py-3.5 rounded-l-full hover:bg-white/90 transition-colors"
+              href={whatsappLink(defaultEnquiry)}
+              target="_blank"
+              rel="noreferrer noopener"
+              className="bg-[#f5c518] text-[#2b241d] text-sm font-medium px-7 py-3.5 rounded-l-full hover:bg-[#ffd23f] transition-colors"
             >
-              Book Consultation
+              Message Us on WhatsApp
             </a>
             <a
-              href="/projects"
-              className="bg-white text-[#2b241d] px-4 py-3.5 rounded-r-full border-l border-white/15 hover:bg-white/90 transition-colors"
+              href={whatsappLink(defaultEnquiry)}
+              target="_blank"
+              rel="noreferrer noopener"
+              className="bg-[#f5c518] text-[#2b241d] px-4 py-3.5 rounded-r-full border-l border-black/10 hover:bg-[#ffd23f] transition-colors"
+              aria-label="Message us on WhatsApp"
             >
               <ChevronRight className="w-4 h-4" />
             </a>

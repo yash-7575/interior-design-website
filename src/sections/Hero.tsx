@@ -1,13 +1,14 @@
 import { motion } from "framer-motion";
 import { ChevronRight, Mouse } from "lucide-react";
 import { images } from "@/data/content";
+import { business, whatsappLink, defaultEnquiry } from "@/data/business";
 
 export default function Hero() {
   return (
     <section className="relative h-[92vh] min-h-[620px] overflow-hidden">
       <motion.img
         src={images.hero}
-        alt="Luxury living room with stone fireplace and forest view"
+        alt="Turnkey interior project by MegaDream Associates"
         className="absolute inset-0 w-full h-full object-cover"
         initial={{ scale: 1.12 }}
         animate={{ scale: 1 }}
@@ -22,9 +23,9 @@ export default function Hero() {
           transition={{ duration: 0.9, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
           className="font-serif-display text-white text-5xl md:text-7xl leading-[1.08] max-w-3xl"
         >
-          Designing Spaces
+          Turnkey Interiors,
           <br />
-          That Define Luxury
+          Built End to End
         </motion.h1>
 
         <motion.p
@@ -33,8 +34,8 @@ export default function Hero() {
           transition={{ duration: 0.8, delay: 0.55 }}
           className="text-white/75 text-sm md:text-base mt-6 max-w-md leading-relaxed"
         >
-          Explore exclusive properties designed for comfort elegance and modern
-          living in prime locations worldwide
+          {business.pitch} Every trade handled in-house — design, manufacturing
+          and site execution under one accountable team.
         </motion.p>
 
         <motion.div
@@ -48,21 +49,23 @@ export default function Hero() {
               href="/projects"
               className="bg-white text-[#2b241d] text-sm px-6 py-3 rounded-l-md hover:bg-white/90 transition-colors"
             >
-              Explore Designs
+              View Our Work
             </a>
             <a
               href="/projects"
               className="bg-white text-[#2b241d] px-3.5 py-3 rounded-r-md border-l border-black/10 hover:bg-white/90 transition-colors"
-              aria-label="Explore designs"
+              aria-label="View our work"
             >
               <ChevronRight className="w-4 h-4" />
             </a>
           </div>
           <a
-            href="/contact"
+            href={whatsappLink(defaultEnquiry)}
+            target="_blank"
+            rel="noreferrer noopener"
             className="text-white text-sm underline underline-offset-8 decoration-white/50 hover:decoration-white transition-all"
           >
-            Book a Private Tour
+            Get a Free Quote
           </a>
         </motion.div>
       </div>
