@@ -20,14 +20,4 @@ export default defineConfig([
       globals: globals.browser,
     },
   },
-  {
-    // Vendored shadcn/ui code: co-exporting variants/helpers alongside
-    // components and the sidebar skeleton's random width are upstream
-    // patterns we don't mutate on shadcn updates.
-    files: ['src/components/ui/**/*.{ts,tsx}'],
-    rules: {
-      'react-refresh/only-export-components': 'off',
-      'react-hooks/purity': 'off',
-    },
-  },
 ])
