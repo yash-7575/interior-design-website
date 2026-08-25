@@ -14,7 +14,7 @@ export default function Journal() {
             transition={{ duration: 0.8 }}
             className="font-serif-display text-4xl md:text-6xl text-[#2b241d] leading-[1.12]"
           >
-            Luxury interior spaces crafted with elegance, precision, and refined aesthetics
+            Notes from the site &mdash; materials, costing and execution
           </motion.h2>
           <motion.div
             initial={{ opacity: 0, y: 40 }}
@@ -24,20 +24,20 @@ export default function Journal() {
             className="lg:justify-self-end max-w-sm"
           >
             <p className="text-[#6b6156] text-[15px] leading-relaxed">
-              Thoughtfully crafted spaces blending elegance, comfort, and
-              functionality to enhance modern living.
+              Practical guidance on how interior work actually gets planned, priced
+              and built, written by the team that does it.
             </p>
             <div className="flex mt-7">
               <a
-                href="#listings"
+                href="/journal"
                 className="bg-[#33291f] text-white text-sm px-7 py-3.5 rounded-l-full hover:bg-[#241c14] transition-colors"
               >
-                View All Project
+                Read the Journal
               </a>
               <a
-                href="#listings"
+                href="/journal"
                 className="bg-[#33291f] text-white px-4 py-3.5 rounded-r-full border-l border-white/15 hover:bg-[#241c14] transition-colors"
-                aria-label="View all projects"
+                aria-label="Read the journal"
               >
                 <ChevronRight className="w-4 h-4" />
               </a>

@@ -1,7 +1,9 @@
 import { Link } from "react-router";
 import { motion } from "framer-motion";
 import { ArrowUpRight, ChevronRight } from "lucide-react";
-import { images, footerLinks } from "@/data/content";
+import { footerLinks } from "@/data/content";
+import { business, contact, socials, whatsappLink, defaultEnquiry } from "@/data/business";
+import { LogoMark } from "@/components/Logo";
 
 export default function Footer() {
   return (
@@ -16,9 +18,9 @@ export default function Footer() {
             transition={{ duration: 0.8 }}
             className="font-serif-display text-4xl md:text-6xl leading-[1.15] max-w-2xl"
           >
-            Discover Timeless Interiors
+            Planning an Interior Project?
             <br />
-            Crafted for Modern Living
+            Let&rsquo;s Talk on WhatsApp
           </motion.h2>
 
           <motion.div
@@ -28,33 +30,28 @@ export default function Footer() {
             transition={{ duration: 0.8, delay: 0.15 }}
             className="shrink-0"
           >
-            <div className="flex items-center gap-3">
-              <div className="flex -space-x-3">
-                {images.avatars.map((a, i) => (
-                  <img
-                    key={i}
-                    src={a}
-                    alt="Member"
-                    className="w-11 h-11 rounded-full border-2 border-[#33291f] object-cover"
-                  />
-                ))}
-              </div>
-              <p className="text-sm text-[#c9bda9]">50k+ Members Joined Us</p>
-            </div>
+            <p className="text-sm text-[#c9bda9] max-w-xs leading-relaxed">
+              Send us your floor plan or requirement and we&rsquo;ll get back with a
+              scope and an itemised estimate.
+            </p>
             <div className="flex mt-6">
-              <Link
-                to="/contact"
-                className="bg-[#f6f2ea] text-[#2b241d] text-sm px-7 py-3.5 rounded-l-full hover:bg-white transition-colors"
+              <a
+                href={whatsappLink(defaultEnquiry)}
+                target="_blank"
+                rel="noreferrer noopener"
+                className="bg-[#f5c518] text-[#2b241d] text-sm font-medium px-7 py-3.5 rounded-l-full hover:bg-[#ffd23f] transition-colors"
               >
-                Start Your Design
-              </Link>
-              <Link
-                to="/contact"
-                className="bg-[#f6f2ea] text-[#2b241d] px-4 py-3.5 rounded-r-full border-l border-black/10 hover:bg-white transition-colors"
-                aria-label="Start your design"
+                Enquire on WhatsApp
+              </a>
+              <a
+                href={whatsappLink(defaultEnquiry)}
+                target="_blank"
+                rel="noreferrer noopener"
+                className="bg-[#f5c518] text-[#2b241d] px-4 py-3.5 rounded-r-full border-l border-black/10 hover:bg-[#ffd23f] transition-colors"
+                aria-label="Enquire on WhatsApp"
               >
                 <ChevronRight className="w-4 h-4" />
-              </Link>
+              </a>
             </div>
           </motion.div>
         </div>
@@ -62,7 +59,7 @@ export default function Footer() {
         {/* links */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-10 py-14">
           <div className="space-y-1">
-            {footerLinks.socials.map((s) => (
+            {socials.map((s) => (
               <a
                 key={s.label}
                 href={s.url}
@@ -88,7 +85,7 @@ export default function Footer() {
             </ul>
           </div>
           <div>
-            <h4 className="text-sm font-medium text-white mb-5">Property Types</h4>
+            <h4 className="text-sm font-medium text-white mb-5">What We Do</h4>
             <ul className="space-y-3">
               {footerLinks.property.map((l) => (
                 <li key={l.label}>
@@ -100,21 +97,53 @@ export default function Footer() {
             </ul>
           </div>
           <div>
-            <h4 className="text-sm font-medium text-white mb-5">Location</h4>
-            <p className="text-sm text-[#a89a83] leading-relaxed">
-              4520 Washington Ave.
+            <h4 className="text-sm font-medium text-white mb-5">Visit Us</h4>
+            <a
+              href={contact.mapsUrl}
+              target="_blank"
+              rel="noreferrer noopener"
+              className="text-sm text-[#a89a83] hover:text-white transition-colors leading-relaxed block"
+            >
+              {contact.address.line1}
               <br />
-              Manchester, 39495
-            </p>
-            <h4 className="text-sm font-medium text-white mt-7 mb-3">Call Us</h4>
-            <a href="tel:+6281575658150" className="text-sm text-[#a89a83] hover:text-white transition-colors">
-              +62 815 7565 8150
+              {contact.address.line2}
+              <br />
+              {contact.address.line3}
             </a>
+
+            <h4 className="text-sm font-medium text-white mt-7 mb-3">Call Us</h4>
+            <ul className="space-y-2">
+              {contact.phones.slice(0, 2).map((p) => (
+                <li key={p.tel}>
+                  <a href={`tel:${p.tel}`} className="text-sm text-[#a89a83] hover:text-white transition-colors">
+                    {p.display}
+                    <span className="text-[#6b6156]"> · {p.name}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+
+            <h4 className="text-sm font-medium text-white mt-7 mb-3">Email</h4>
+            <a
+              href={`mailto:${contact.email}`}
+              className="text-sm text-[#a89a83] hover:text-white transition-colors break-all"
+            >
+              {contact.email}
+            </a>
+
+            <h4 className="text-sm font-medium text-white mt-7 mb-3">Hours</h4>
+            <p className="text-sm text-[#a89a83] leading-relaxed">
+              {contact.hours.weekdays}
+              <br />
+              {contact.hours.weekend}
+            </p>
           </div>
         </div>
 
         <div className="flex flex-col md:flex-row items-center justify-between gap-3 py-6 border-t border-white/10 text-xs text-[#8a7d6c]">
-          <p>@2026 Eloria copyright. All right reserved</p>
+          <p>
+            &copy; {new Date().getFullYear()} {business.name}. All rights reserved.
+          </p>
           <p>
             <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
             <span className="mx-2">|</span>
@@ -128,25 +157,19 @@ export default function Footer() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-40px" }}
           transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-          className="select-none text-center font-serif-display text-[#f6f2ea] leading-[0.85] text-[clamp(5rem,17.5vw,17rem)] tracking-tight pb-2"
+          className="select-none flex items-center justify-center gap-[0.06em] text-center font-serif-display text-[#f6f2ea] leading-[0.85] text-[clamp(3.2rem,12vw,11rem)] tracking-tight pb-2"
           aria-hidden="true"
         >
-          <span>EL</span>
-          <span className="relative inline-block">
-            O
-            <span className="absolute inset-0 flex items-center justify-center">
-              <motion.img
-                src={images.hero}
-                alt=""
-                className="w-[46%] h-[62%] object-cover rounded-full"
-                initial={{ scale: 0, rotate: -12 }}
-                whileInView={{ scale: 1, rotate: 0 }}
-                viewport={{ once: true, margin: "-40px" }}
-                transition={{ duration: 0.9, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
-              />
-            </span>
-          </span>
-          <span>RIA</span>
+          <motion.span
+            initial={{ scale: 0, rotate: -12 }}
+            whileInView={{ scale: 1, rotate: 0 }}
+            viewport={{ once: true, margin: "-40px" }}
+            transition={{ duration: 0.9, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
+            className="inline-flex shrink-0"
+          >
+            <LogoMark className="w-[0.85em] h-[0.85em]" />
+          </motion.span>
+          <span>MEGADREAM</span>
         </motion.div>
       </div>
     </footer>

@@ -1,70 +1,71 @@
 import { motion } from "framer-motion";
-import { ChevronRight, Calendar, Tag, Clock, ArrowUpRight } from "lucide-react";
+import { ChevronRight, Calendar, Tag, Clock, ArrowUpRight, MessageCircle } from "lucide-react";
+import { contact, whatsappLink, defaultEnquiry } from "@/data/business";
 
 const posts = [
   {
     id: 1,
-    title: "Enduring Luxury: Interiors Designed to Inspire",
-    desc: "Designed with precision and refined aesthetics, our featured projects showcase modern elegance, functional design, curated textures, bespoke elements, and a timeless sense of luxury.",
+    title: "What a Turnkey Interior Project Actually Includes",
+    desc: "Turnkey means more than furniture. Here is every trade a complete interior touches — civil, ceiling, electrical, plumbing, carpentry, finishing — and the questions worth asking before you sign a quotation.",
     date: "12 Feb 2026",
-    category: "Interior Design",
+    category: "Turnkey Execution",
     readTime: "8 min read",
-    image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&h=600&fit=crop",
-    author: "Elena Vasquez",
+    image: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=800&h=600&fit=crop",
+    author: "Durgesh Mishra",
   },
   {
     id: 2,
-    title: "Elevating Modern Living with Minimalist Elegance",
-    desc: "How restraint and careful curation create spaces that feel both serene and sophisticated. A deep dive into our latest Manhattan penthouse project.",
+    title: "Choosing Materials for a Modular Kitchen in Pune",
+    desc: "Plywood grade, laminate versus acrylic, hardware brands and the humidity a Pune monsoon puts them through. A practical guide to specifying a kitchen that lasts.",
     date: "8 Dec 2025",
-    category: "Residential",
+    category: "Modular Kitchens",
     readTime: "6 min read",
-    image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&h=600&fit=crop",
-    author: "Marcus Chen",
+    image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&h=600&fit=crop",
+    author: "Raj Mishra",
   },
   {
     id: 3,
-    title: "Sustainable Luxury: Designing Eco-Conscious Interiors",
-    desc: "Responsible sourcing doesn't mean compromising on beauty. Explore how we integrate reclaimed materials, energy-efficient systems, and ethical craftsmanship.",
+    title: "Plan Your Electricals Before the Carpentry Starts",
+    desc: "Switchboards behind wardrobes and missing points above the counter are the most common — and most expensive — rework we see. Here is the sequence that avoids it.",
     date: "25 Jan 2026",
-    category: "Eco Design",
-    readTime: "10 min read",
-    image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&h=600&fit=crop",
-    author: "Sophie Laurent",
+    category: "Execution Notes",
+    readTime: "5 min read",
+    image: "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=800&h=600&fit=crop",
+    author: "Durgesh Mishra",
   },
   {
     id: 4,
-    title: "The Art of Lighting: Transforming Spaces After Dark",
-    desc: "Layered lighting design that shifts atmosphere from day to night. Technical insights from our lighting curation specialists.",
+    title: "False Ceiling Types: Cove, Gypsum, Grid and Acoustic",
+    desc: "Which ceiling suits which room, what each costs to run per square foot, and where a grid ceiling makes more sense than gypsum in a commercial space.",
     date: "15 Nov 2025",
-    category: "Lighting Design",
+    category: "Civil & Ceiling",
     readTime: "7 min read",
-    image: "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=800&h=600&fit=crop",
-    author: "Marcus Chen",
+    image: "https://images.unsplash.com/photo-1581539250439-c96689b516dd?w=800&h=600&fit=crop",
+    author: "Raj Mishra",
   },
   {
     id: 5,
-    title: "Curating Art for the Home: A Collector's Guide",
-    desc: "How to select, frame, and place artwork that resonates with your space and story. Tips from our art advisory team.",
+    title: "Reading an Interior Quotation Line by Line",
+    desc: "What an itemised quotation should contain, which line items commonly hide extra cost, and how to compare two estimates that look nothing alike.",
     date: "3 Oct 2025",
-    category: "Art & Decor",
+    category: "Costing",
     readTime: "9 min read",
-    image: "https://images.unsplash.com/photo-1578301978593-12a6334f6812?w=800&h=600&fit=crop",
-    author: "Elena Vasquez",
+    image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&h=600&fit=crop",
+    author: "Durgesh Mishra",
   },
   {
     id: 6,
-    title: "Behind the Project: Coastal Modern Villa",
-    desc: "An exclusive walkthrough of our Malibu cliffside residence — from concept sketches to final reveal. Challenges, solutions, and design decisions.",
+    title: "Fitting Out an Office Without Shutting It Down",
+    desc: "How we phase commercial fit-outs around working hours — sequencing, dust control, and the trades that have to run at night.",
     date: "22 Sep 2025",
-    category: "Case Studies",
-    readTime: "12 min read",
-    image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&h=600&fit=crop",
-    author: "Elena Vasquez",
+    category: "Commercial",
+    readTime: "6 min read",
+    image: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&h=600&fit=crop",
+    author: "Raj Mishra",
   },
 ];
 
-const categories = ["All", "Interior Design", "Residential", "Eco Design", "Lighting Design", "Art & Decor", "Case Studies"];
+const categories = ["All", "Turnkey Execution", "Modular Kitchens", "Execution Notes", "Civil & Ceiling", "Costing", "Commercial"];
 
 function ArticleCard({ post, delay }: { post: (typeof posts)[number]; delay: number }) {
   return (
@@ -139,9 +140,9 @@ export default function Journal() {
             transition={{ duration: 0.9, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
             className="font-serif-display text-white text-5xl md:text-7xl leading-[1.08] max-w-3xl"
           >
-            Journal &
+            Notes From
             <br />
-            Inspiration
+            the Site
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 24 }}
@@ -149,7 +150,8 @@ export default function Journal() {
             transition={{ duration: 0.8, delay: 0.55 }}
             className="text-white/75 text-sm md:text-base mt-6 max-w-md leading-relaxed"
           >
-            Insights, case studies, and design wisdom from the Eloria studio.
+            Practical guidance on materials, costing and execution, written by the
+            team that does the work.
           </motion.p>
         </div>
       </section>
@@ -219,35 +221,39 @@ export default function Journal() {
               transition={{ duration: 0.8 }}
             >
               <h2 className="font-serif-display text-4xl md:text-6xl text-white leading-[1.12]">
-                Stay Inspired
+                Have a Question?
               </h2>
               <p className="text-white/70 mt-6 leading-relaxed text-[15px] max-w-lg">
-                Monthly design insights, project highlights, and exclusive studio updates — delivered to your inbox.
+                If something here applies to your own project, message us — we&rsquo;re
+                happy to talk through materials, sequencing or costing before you
+                commit to anything.
               </p>
             </motion.div>
 
-            <motion.form
+            <motion.div
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-80px" }}
               transition={{ duration: 0.8, delay: 0.15 }}
-              className="flex flex-col sm:flex-row gap-3 max-w-md"
-              onSubmit={(e) => { e.preventDefault(); alert("Thanks for subscribing!"); }}
+              className="flex flex-col sm:flex-row gap-3"
             >
-              <input
-                type="email"
-                placeholder="Enter your email"
-                required
-                className="flex-1 px-5 py-4 bg-white/10 border border-white/20 rounded-l-full text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-white/30 focus:border-transparent transition-all"
-              />
-              <button
-                type="submit"
-                className="bg-white text-[#2b241d] px-7 py-4 rounded-r-full hover:bg-white/90 transition-colors flex items-center gap-2 font-medium"
+              <a
+                href={whatsappLink(defaultEnquiry)}
+                target="_blank"
+                rel="noreferrer noopener"
+                className="inline-flex items-center justify-center gap-2 bg-[#f5c518] text-[#2b241d] font-medium px-7 py-4 rounded-full hover:bg-[#ffd23f] transition-colors"
               >
-                Subscribe
+                <MessageCircle className="w-4 h-4" />
+                WhatsApp {contact.whatsapp.display}
+              </a>
+              <a
+                href={`mailto:${contact.email}`}
+                className="inline-flex items-center justify-center gap-2 border border-white/25 text-white px-7 py-4 rounded-full hover:bg-white/10 transition-colors"
+              >
+                Email Us
                 <ArrowUpRight className="w-4 h-4" />
-              </button>
-            </motion.form>
+              </a>
+            </motion.div>
           </div>
         </div>
       </section>

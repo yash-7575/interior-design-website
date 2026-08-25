@@ -36,7 +36,7 @@ function ListingCard({
             {item.location}
           </p>
         </div>
-        <span className="font-serif-display text-lg md:text-xl text-[#2b241d] whitespace-nowrap">{item.price}</span>
+        <span className="text-xs tracking-wider uppercase text-[#8a7d6c] whitespace-nowrap pt-2">{item.scope}</span>
       </div>
     </motion.div>
   );
@@ -53,25 +53,25 @@ export default function Listings() {
           transition={{ duration: 0.8 }}
           className="text-center max-w-3xl mx-auto"
         >
-          <p className="text-xs tracking-[0.3em] text-[#6b5b4a] font-medium text-left md:text-center">New Listings</p>
+          <p className="text-xs tracking-[0.3em] text-[#6b5b4a] font-medium text-left md:text-center">Recent Work</p>
           <h2 className="font-serif-display text-4xl md:text-6xl text-[#2b241d] leading-[1.12] mt-6">
-            Discover Newly Curated Luxury Interiors for Modern Elegant Living Spaces
+            Interiors We Have Designed, Built and Handed Over Across Pune
           </h2>
           <p className="text-[#6b6156] mt-7 leading-relaxed text-[15px] max-w-2xl mx-auto">
-            Discover our latest curated interior listings, showcasing timeless
-            elegance, premium craftsmanship, modern aesthetics, and refined living
-            spaces designed to inspire comfort, beauty, and luxury lifestyle experience.
+            Residential flats, corporate offices and modular kitchens — executed
+            end to end by our own teams, from civil and ceiling work through to
+            the furniture manufactured in our facility.
           </p>
           <div className="flex justify-center mt-9">
             <div className="flex">
               <a
-                href="#journal"
+                href="/projects"
                 className="bg-[#33291f] text-white text-sm px-7 py-3.5 rounded-l-full hover:bg-[#241c14] transition-colors"
               >
                 Explore More
               </a>
               <a
-                href="#journal"
+                href="/projects"
                 className="bg-[#33291f] text-white px-4 py-3.5 rounded-r-full border-l border-white/15 hover:bg-[#241c14] transition-colors"
                 aria-label="Explore more"
               >

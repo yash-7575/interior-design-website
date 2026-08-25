@@ -1,7 +1,19 @@
-# interior-design-website
+# MegaDream Associates
 
-Marketing site for a fictional luxury interior design studio ("ELORIA").
+Marketing site for MegaDream Associates — turnkey interior execution specialists and
+furniture manufacturers based in Pune, Maharashtra.
+
 Vite + React 19 + TypeScript + Tailwind CSS.
+
+## Editing business details
+
+Phone numbers, WhatsApp number, email, address, working hours, social links and the
+headline stats all live in [`src/data/business.ts`](src/data/business.ts). Change them
+there and every page updates. The 25 services live in
+[`src/data/services.ts`](src/data/services.ts).
+
+Enquiries route to WhatsApp (+91 83298 42119) — the contact form pre-fills a message
+and opens `wa.me` rather than posting to a server.
 
 ## Local development
 
