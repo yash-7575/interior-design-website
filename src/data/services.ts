@@ -7,6 +7,13 @@
  * page derives it from the groups.
  */
 
+import turnkeyImg from "@/assets/img/projects/turnkey-living-dining-full-length.webp";
+import furnitureImg from "@/assets/img/projects/sofa-tan-scalloped-loveseat.webp";
+import civilImg from "@/assets/img/projects/fluted-partition-marble-counter.webp";
+import mepImg from "@/assets/img/projects/modular-kitchen-tall-units-and-wiring.webp";
+import residentialImg from "@/assets/img/projects/master-bedroom-gold-panelled-headboard.webp";
+import commercialImg from "@/assets/img/projects/office-fitout-feature-wall-graphics.webp";
+
 export type ServiceGroup = {
   id: string;
   title: string;
@@ -22,7 +29,7 @@ export const serviceGroups: ServiceGroup[] = [
     description:
       "One contract, one accountable team, from empty shell to handover. We plan the space, visualise it, procure the materials and supervise every trade on site so you deal with a single point of contact.",
     image:
-      "https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=800&h=600&fit=crop",
+      turnkeyImg,
     features: [
       "Turnkey interior execution & project management",
       "Space planning & 2D/3D architectural layouts",
@@ -38,7 +45,7 @@ export const serviceGroups: ServiceGroup[] = [
     description:
       "We manufacture what we design. Modular kitchens, wardrobes and loose furniture are built in our own facility, which keeps quality, finish and delivery timelines under our control.",
     image:
-      "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&h=600&fit=crop",
+      furnitureImg,
     features: [
       "Modular kitchen & storage design",
       "Custom furniture design & manufacturing",
@@ -52,7 +59,7 @@ export const serviceGroups: ServiceGroup[] = [
     description:
       "The structural work that everything else sits on. Ceilings, partitions, glazing, masonry and finishes executed by in-house teams to a measured standard.",
     image:
-      "https://images.unsplash.com/photo-1581539250439-c96689b516dd?w=800&h=600&fit=crop",
+      civilImg,
     features: [
       "False ceiling & POP works — cove, gypsum, grid, acoustic",
       "Aluminium & fabrication — sliding windows, doors, partitions, balcony enclosures",
@@ -67,7 +74,7 @@ export const serviceGroups: ServiceGroup[] = [
     description:
       "Services planned alongside the design rather than bolted on afterwards, so switchboards, outlets, ducting and drainage land where the furniture actually needs them.",
     image:
-      "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=800&h=600&fit=crop",
+      mepImg,
     features: [
       "Electrical planning & smart lighting integration",
       "Plumbing & sanitary fitting work",
@@ -81,7 +88,7 @@ export const serviceGroups: ServiceGroup[] = [
     description:
       "Flats, bungalows and row houses across Pune — whole homes or a single room, new possession or a full remodel of a place you have lived in for years.",
     image:
-      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&h=600&fit=crop",
+      residentialImg,
     features: [
       "Residential interior design — living rooms, master bedrooms, kids' spaces",
       "Home renovation, remodelling & makeovers",
@@ -95,7 +102,7 @@ export const serviceGroups: ServiceGroup[] = [
     description:
       "Offices, showrooms, restaurants and cafes built to run — durable materials, service-friendly layouts and schedules that work around your business hours.",
     image:
-      "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&h=600&fit=crop",
+      commercialImg,
     features: [
       "Commercial & corporate office fit-outs",
       "Retail & hospitality design — showrooms, restaurants, cafes",

@@ -2,6 +2,14 @@ import { motion } from "framer-motion";
 import { ChevronRight, Calendar, Tag, Clock, ArrowUpRight, MessageCircle } from "lucide-react";
 import { contact, whatsappLink, defaultEnquiry } from "@/data/business";
 
+import postTurnkey from "@/assets/img/projects/turnkey-living-dining-cove-ceiling.webp";
+import postKitchen from "@/assets/img/projects/modular-kitchen-installation-underway.webp";
+import postElectrical from "@/assets/img/projects/modular-kitchen-tall-units-and-wiring.webp";
+import postCeiling from "@/assets/img/projects/false-ceiling-cove-lighting-detail.webp";
+import postFurniture from "@/assets/img/projects/sofa-blue-velvet-corner-sectional.webp";
+import postCommercial from "@/assets/img/projects/office-fitout-glazed-cabin-partitions.webp";
+import journalBanner from "@/assets/img/projects/turnkey-living-dining-television-wall.webp";
+
 const posts = [
   {
     id: 1,
@@ -10,7 +18,7 @@ const posts = [
     date: "12 Feb 2026",
     category: "Turnkey Execution",
     readTime: "8 min read",
-    image: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=800&h=600&fit=crop",
+    image: postTurnkey,
     author: "Durgesh Mishra",
   },
   {
@@ -20,7 +28,7 @@ const posts = [
     date: "8 Dec 2025",
     category: "Modular Kitchens",
     readTime: "6 min read",
-    image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&h=600&fit=crop",
+    image: postKitchen,
     author: "Raj Mishra",
   },
   {
@@ -30,7 +38,7 @@ const posts = [
     date: "25 Jan 2026",
     category: "Execution Notes",
     readTime: "5 min read",
-    image: "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=800&h=600&fit=crop",
+    image: postElectrical,
     author: "Durgesh Mishra",
   },
   {
@@ -40,7 +48,7 @@ const posts = [
     date: "15 Nov 2025",
     category: "Civil & Ceiling",
     readTime: "7 min read",
-    image: "https://images.unsplash.com/photo-1581539250439-c96689b516dd?w=800&h=600&fit=crop",
+    image: postCeiling,
     author: "Raj Mishra",
   },
   {
@@ -50,7 +58,7 @@ const posts = [
     date: "3 Oct 2025",
     category: "Costing",
     readTime: "9 min read",
-    image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&h=600&fit=crop",
+    image: postFurniture,
     author: "Durgesh Mishra",
   },
   {
@@ -60,7 +68,7 @@ const posts = [
     date: "22 Sep 2025",
     category: "Commercial",
     readTime: "6 min read",
-    image: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&h=600&fit=crop",
+    image: postCommercial,
     author: "Raj Mishra",
   },
 ];
@@ -125,7 +133,7 @@ export default function Journal() {
       {/* Page Hero */}
       <section className="relative h-[50vh] min-h-[400px] overflow-hidden">
         <motion.img
-          src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1920&q=80"
+          src={journalBanner}
           alt="Design journal and inspiration"
           className="absolute inset-0 w-full h-full object-cover"
           initial={{ scale: 1.12 }}

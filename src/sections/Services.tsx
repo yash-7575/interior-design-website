@@ -1,14 +1,21 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, ChevronRight } from "lucide-react";
-import { images, serviceCategories, serviceItems, featured, listings, posts } from "@/data/content";
+import { serviceCategories, serviceItems } from "@/data/content";
 
+import turnkeyImg from "@/assets/img/projects/turnkey-living-dining-seating-view.webp";
+import furnitureImg from "@/assets/img/projects/sofa-teal-tufted-three-piece-set.webp";
+import civilImg from "@/assets/img/projects/jali-partition-floral-cnc-screen.webp";
+import mepImg from "@/assets/img/projects/modular-kitchen-tall-units-and-wiring.webp";
+import commercialImg from "@/assets/img/projects/office-fitout-open-plan-workstations.webp";
+
+/** One image per entry in `serviceCategories`, in the same order. */
 const categoryImages = [
-  images.services,
-  featured[1].image,
-  listings[3].image,
-  posts[0].image,
-  images.aboutDining,
+  { src: turnkeyImg, alt: "Turnkey living and dining interior with cove lighting and fluted panelling" },
+  { src: furnitureImg, alt: "Teal velvet three-piece suite manufactured in the MegaDream facility" },
+  { src: civilImg, alt: "Floral CNC-cut partition screen fabricated in a dark walnut finish" },
+  { src: mepImg, alt: "Kitchen tall units with electrical points being run in behind" },
+  { src: commercialImg, alt: "Open-plan office fit-out with workstation clusters and acoustic grid ceiling" },
 ];
 
 export default function Services() {
@@ -78,8 +85,8 @@ export default function Services() {
             <AnimatePresence mode="wait">
               <motion.img
                 key={active}
-                src={categoryImages[active]}
-                alt={serviceCategories[active]}
+                src={categoryImages[active].src}
+                alt={categoryImages[active].alt}
                 initial={{ opacity: 0, scale: 1.06 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0 }}

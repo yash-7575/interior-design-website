@@ -3,6 +3,10 @@ import { motion, useInView } from "framer-motion";
 import { ChevronRight, Phone } from "lucide-react";
 import { business, whatsappLink, defaultEnquiry, stats } from "@/data/business";
 
+import aboutBanner from "@/assets/img/projects/turnkey-living-dining-blue-sofa.webp";
+import aboutWorkshop from "@/assets/img/projects/sofa-teal-tufted-three-piece-set.webp";
+import aboutCraft from "@/assets/img/projects/jali-partition-interlocking-circles.webp";
+
 function CountUp({ value, suffix }: { value: number; suffix: string }) {
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
@@ -43,16 +47,18 @@ const team = [
     role: "Founder & Project Head",
     bio: "Leads site execution and client relationships. Oversees every project from the first site visit through final handover.",
     phone: "+91 97623 08053",
-    // TODO: replace with a real photograph once supplied.
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face",
+    // TODO: add `image` here once MegaDream supplies a real photograph. Until
+    // then the card falls back to initials — a stock stranger's face under a
+    // real person's name is worse than no photograph at all.
+    initials: "DM",
   },
   {
     name: "Raj Mishra",
     role: "Partner & Design Lead",
     bio: "Handles design, 3D visualisation and costing. Your first point of contact for new enquiries on WhatsApp.",
     phone: "+91 83298 42119",
-    // TODO: replace with a real photograph once supplied.
-    image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&h=400&fit=crop&crop=face",
+    // TODO: add `image` here once MegaDream supplies a real photograph.
+    initials: "RM",
   },
 ];
 
@@ -81,7 +87,7 @@ export default function About() {
       {/* Page Hero */}
       <section className="relative h-[70vh] min-h-[500px] overflow-hidden">
         <motion.img
-          src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1920&q=80"
+          src={aboutBanner}
           alt="MegaDream Associates interior project"
           className="absolute inset-0 w-full h-full object-cover"
           initial={{ scale: 1.12 }}
@@ -120,7 +126,7 @@ export default function About() {
               <p className="text-xs tracking-[0.3em] text-[#6b5b4a] mb-8 font-medium">ABOUT US</p>
               <div className="overflow-hidden rounded-sm max-w-[260px]">
                 <motion.img
-                  src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=520&h=650&fit=crop"
+                  src={aboutWorkshop}
                   alt="Completed residential interior"
                   className="w-full aspect-[4/3] object-cover hover:scale-105 transition-transform duration-700"
                 />
@@ -167,7 +173,7 @@ export default function About() {
             <motion.div {...fadeUp} transition={{ duration: 0.8, delay: 0.2 }} className="lg:col-span-4 order-3">
               <div className="overflow-hidden rounded-sm lg:mt-16">
                 <img
-                  src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&h=800&fit=crop"
+                  src={aboutCraft}
                   alt="Modular kitchen manufactured in-house"
                   className="w-full aspect-[3/4] object-cover hover:scale-105 transition-transform duration-700"
                 />
@@ -259,13 +265,13 @@ export default function About() {
                 transition={{ duration: 0.7, delay: i * 0.12 }}
                 className="group"
               >
-                <div className="overflow-hidden rounded-xl aspect-square">
-                  <img
-                    src={member.image}
-                    alt={member.name}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                    loading="lazy"
-                  />
+                <div className="overflow-hidden rounded-xl aspect-square bg-[#e2d9c8] flex items-center justify-center">
+                  <span
+                    aria-hidden="true"
+                    className="font-serif-display text-6xl md:text-7xl text-[#8a7d6c] group-hover:scale-105 transition-transform duration-700"
+                  >
+                    {member.initials}
+                  </span>
                 </div>
                 <div className="mt-6">
                   <h3 className="font-serif-display text-xl md:text-2xl text-[#2b241d]">{member.name}</h3>
