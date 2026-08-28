@@ -58,7 +58,8 @@ export default function Journal() {
               <div className="overflow-hidden rounded-lg">
                 <img
                   src={post.image}
-                  alt={post.title}
+                  alt={post.alt}
+                  loading="lazy"
                   className="w-full aspect-[4/3] object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
                 />
               </div>

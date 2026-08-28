@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronLeft, ChevronRight, MapPin } from "lucide-react";
+import { ChevronLeft, ChevronRight, Layers } from "lucide-react";
 import { featured } from "@/data/content";
 
 export default function FeaturedSlider() {
@@ -25,7 +25,7 @@ export default function FeaturedSlider() {
             <motion.img
               key={index}
               src={current.image}
-              alt={current.name}
+              alt={current.alt}
               custom={direction}
               initial={{ opacity: 0, x: direction >= 0 ? 120 : -120, scale: 1.05 }}
               animate={{ opacity: 1, x: 0, scale: 1 }}
@@ -48,8 +48,8 @@ export default function FeaturedSlider() {
             >
               <h3 className="font-serif-display text-2xl text-[#2b241d]">{current.name}</h3>
               <p className="flex items-center gap-1.5 text-[#8a7d6c] text-sm mt-2">
-                <MapPin className="w-3.5 h-3.5" />
-                {current.location}
+                <Layers className="w-3.5 h-3.5" />
+                {current.category}
               </p>
               <p className="text-[#6b6156] text-sm leading-relaxed mt-4">{current.desc}</p>
               <div className="flex items-center justify-between mt-6">

@@ -49,7 +49,7 @@ export default function About() {
             <div className="overflow-hidden rounded-sm max-w-[260px]">
               <motion.img
                 src={images.aboutDining}
-                alt="Completed residential interior"
+                alt="Beige sectional sofa, manufactured in-house and installed in a client's living room"
                 className="w-full aspect-[4/3] object-cover hover:scale-105 transition-transform duration-700"
               />
             </div>
@@ -87,7 +87,7 @@ export default function About() {
             <div className="overflow-hidden rounded-sm lg:mt-16">
               <img
                 src={images.aboutKitchen}
-                alt="In-house manufactured modular kitchen"
+                alt="Gold-finished CNC jali screen framing a marble-clad pooja alcove"
                 className="w-full aspect-[3/4] object-cover hover:scale-105 transition-transform duration-700"
               />
             </div>

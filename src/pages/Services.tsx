@@ -4,6 +4,8 @@ import { ArrowRight, ChevronRight, Check } from "lucide-react";
 import { serviceGroups as serviceCategories, allServices, processSteps } from "@/data/services";
 import { business, whatsappLink, defaultEnquiry } from "@/data/business";
 
+import servicesBanner from "@/assets/img/projects/office-fitout-workstation-rows.webp";
+
 export default function Services() {
   const [active, setActive] = useState(serviceCategories[0].id);
 
@@ -14,7 +16,7 @@ export default function Services() {
       {/* Page Hero */}
       <section className="relative h-[50vh] min-h-[400px] overflow-hidden">
         <motion.img
-          src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1920&q=80"
+          src={servicesBanner}
           alt="Interior design services showcase"
           className="absolute inset-0 w-full h-full object-cover"
           initial={{ scale: 1.12 }}

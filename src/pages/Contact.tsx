@@ -3,6 +3,8 @@ import { motion } from "framer-motion";
 import { Mail, Phone, MapPin, Clock, ChevronRight, MessageCircle, CheckCircle } from "lucide-react";
 import { business, contact, socials, whatsappLink } from "@/data/business";
 
+import contactBanner from "@/assets/img/projects/main-door-veneer-and-brass-inlay.webp";
+
 const contactInfo = [
   {
     icon: MessageCircle,
@@ -120,7 +122,7 @@ export default function Contact() {
       {/* Page Hero */}
       <section className="relative h-[50vh] min-h-[400px] overflow-hidden">
         <motion.img
-          src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1920&q=80"
+          src={contactBanner}
           alt="Modern design studio meeting space"
           className="absolute inset-0 w-full h-full object-cover"
           initial={{ scale: 1.12 }}

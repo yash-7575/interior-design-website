@@ -43,10 +43,20 @@ array at the top of `src/sections/Navbar.tsx` — update both.
   Services, Listings, Journal) plus the global Navbar/Footer. They read their copy from
   `src/data/content.ts` and use bundled images from `src/assets/img/`.
 - `src/pages/*` are standalone routes. `Home.tsx` is a 19-line file that just stacks the
-  sections. Every other page (About, Projects, Services, Journal, Contact) is a self-contained
-  300–500 line file that **defines its own local data arrays inline** and pulls imagery from
-  remote Unsplash URLs rather than from `content.ts` or `assets/`. Editing home-page copy means
-  editing `content.ts`; editing any other page's copy means editing that page file.
+  sections. About, Services, Journal and Contact are self-contained 300–500 line files that
+  **define their own local data arrays inline** — editing home-page copy means editing
+  `content.ts`, editing one of those pages means editing that page file. `Projects.tsx` is
+  the exception: it renders `src/data/projects.ts` and holds no project data of its own.
+
+**Project portfolio** — `src/data/projects.ts` is the single source of truth for the client's
+photography. Each `Project` carries a descriptive name, a `ProjectCategory`, a `scope` line and
+a `images: ProjectImage[]` gallery where every frame has a `caption` used as both alt text and
+lightbox caption. `content.ts` derives the home page's `featured`, `listings` and `posts` from
+this array by id, so the home page and the Projects page cannot show different copy for the
+same work — add a project here and both update. Deliberately no `location` or `year` field: the
+photographs arrived without project identity attached, so projects are named for the work
+visible in the frame rather than for an invented address. `components/Lightbox.tsx` renders the
+galleries (Escape closes, arrows page, body scroll locks).
 
 **Service catalogue** — `src/data/services.ts` holds all 25 services grouped into six
 `serviceGroups`; `allServices` is the flat numbered list derived from those groups, so
@@ -89,7 +99,12 @@ high-resolution logo file, swap the `<svg>` for an `<img>` and the layout is unc
   Radix wiring.
 - Deployment: Vercel auto-detects the Vite preset. `vercel.json` only adds the SPA rewrite to
   `index.html` and immutable caching for `/assets/*`.
-- Imagery is still placeholder: home-page sections use the bundled stock photos in
-  `src/assets/img/`, and the standalone pages pull from Unsplash URLs. Every array holding
-  project names, locations or photos carries a `// TODO:` marking it for replacement with
-  the client's real project photography.
+- Imagery is the client's own, bundled as WebP under `src/assets/img/projects/` and named for
+  what the photograph shows. There are no remote image URLs left anywhere in `src/` — keep it
+  that way; import assets so Vite fingerprints and caches them. Two exceptions are generated
+  rather than photographed, both marked in `content.ts`/`Projects.tsx`: the full-bleed hero and
+  the Projects page banner, because no supplied photograph was wide or high-resolution enough.
+- Still outstanding: the two `team` members in `pages/About.tsx` have no photographs and fall
+  back to initials (`// TODO:` there). Never substitute a stock face under a real person's name.
+- The client's 11 site videos are in the shared Drive folder and unused — the repo bundles no
+  video. Compress before ever committing one; the raw clips run to 137 MB.

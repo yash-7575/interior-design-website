@@ -1,16 +1,15 @@
 import { motion } from "framer-motion";
-import { ChevronRight, MapPin } from "lucide-react";
+import { ChevronRight, Layers } from "lucide-react";
 import { listings } from "@/data/content";
 
 function ListingCard({
   item,
   delay,
-  wide,
 }: {
   item: (typeof listings)[number];
   delay: number;
-  wide?: boolean;
 }) {
+  const { wide } = item;
   return (
     <motion.div
       initial={{ opacity: 0, y: 44 }}
@@ -22,7 +21,8 @@ function ListingCard({
       <div className="overflow-hidden rounded-lg">
         <img
           src={item.image}
-          alt={item.name}
+          alt={item.alt}
+          loading="lazy"
           className={`w-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out ${
             wide ? "aspect-[21/10]" : "aspect-[4/3]"
           }`}
@@ -32,8 +32,8 @@ function ListingCard({
         <div>
           <h3 className="font-serif-display text-xl md:text-2xl text-[#2b241d]">{item.name}</h3>
           <p className="flex items-center gap-1.5 text-[#8a7d6c] text-sm mt-1.5">
-            <MapPin className="w-3.5 h-3.5" />
-            {item.location}
+            <Layers className="w-3.5 h-3.5" />
+            {item.category}
           </p>
         </div>
         <span className="text-xs tracking-wider uppercase text-[#8a7d6c] whitespace-nowrap pt-2">{item.scope}</span>
@@ -82,11 +82,9 @@ export default function Listings() {
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-14 mt-16 md:mt-20">
-          <ListingCard item={listings[0]} delay={0} />
-          <ListingCard item={listings[1]} delay={0.12} />
-          <ListingCard item={listings[2]} delay={0.05} wide />
-          <ListingCard item={listings[3]} delay={0} />
-          <ListingCard item={listings[4]} delay={0.12} />
+          {listings.map((item, i) => (
+            <ListingCard key={item.name} item={item} delay={(i % 2) * 0.12} />
+          ))}
         </div>
       </div>
     </section>

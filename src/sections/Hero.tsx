@@ -8,7 +8,7 @@ export default function Hero() {
     <section className="relative h-[92vh] min-h-[620px] overflow-hidden">
       <motion.img
         src={images.hero}
-        alt="Turnkey interior project by MegaDream Associates"
+        alt="Warm open-plan living and dining interior with cove lighting and fluted wood panelling"
         className="absolute inset-0 w-full h-full object-cover"
         initial={{ scale: 1.12 }}
         animate={{ scale: 1 }}
