@@ -2,7 +2,8 @@ import { useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import { ChevronRight, Layers, Search, Images } from "lucide-react";
 import { business, whatsappLink } from "@/data/business";
-import { projects, projectCategories, coverOf, type Project } from "@/data/projects";
+import { projectCategories, coverOf, type Project } from "@/data/projects";
+import { useProjects } from "@/hooks/useProjects";
 import Lightbox from "@/components/Lightbox";
 import pageBanner from "@/assets/img/banner-projects-marble-living.webp";
 
@@ -29,7 +30,7 @@ function ProjectCard({
     >
       <div className="overflow-hidden rounded-lg relative">
         <img
-          src={cover.src}
+          src={cover.thumb ?? cover.src}
           alt={cover.caption}
           className="w-full aspect-[4/5] object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
           loading="lazy"
@@ -54,7 +55,22 @@ function ProjectCard({
   );
 }
 
+/** Placeholder cards shown while Sanity is still answering. */
+function SkeletonCard() {
+  return (
+    <div className="animate-pulse" aria-hidden="true">
+      <div className="w-full aspect-[4/5] rounded-lg bg-[#e2d9c8]" />
+      <div className="mt-4 space-y-3">
+        <div className="h-3 w-24 rounded bg-[#e2d9c8]" />
+        <div className="h-5 w-3/4 rounded bg-[#e2d9c8]" />
+        <div className="h-3 w-1/2 rounded bg-[#e2d9c8]" />
+      </div>
+    </div>
+  );
+}
+
 export default function Projects() {
+  const { projects, loading } = useProjects();
   const [category, setCategory] = useState<string>("All");
   const [query, setQuery] = useState("");
   const [open, setOpen] = useState<{ project: Project; index: number } | null>(null);
@@ -70,7 +86,7 @@ export default function Projects() {
         p.description.toLowerCase().includes(q);
       return matchesCategory && matchesQuery;
     });
-  }, [category, query]);
+  }, [projects, category, query]);
 
   const paginate = (direction: number) =>
     setOpen((current) =>
@@ -170,6 +186,7 @@ export default function Projects() {
             </div>
             <p className="text-sm text-[#8a7d6c]">
               {visible.length} of {projects.length} projects
+              {loading && <span className="ml-2 text-[#a89a83]">· loading more…</span>}
             </p>
           </motion.div>
 
@@ -183,9 +200,13 @@ export default function Projects() {
                 onOpen={() => setOpen({ project, index: 0 })}
               />
             ))}
+            {/* The bundled projects render immediately; these stand in for the
+                CMS entries still in flight, so the grid never jumps. */}
+            {loading &&
+              Array.from({ length: 3 }, (_, i) => <SkeletonCard key={`skeleton-${i}`} />)}
           </div>
 
-          {visible.length === 0 && (
+          {!loading && visible.length === 0 && (
             <p className="text-center text-[#6b6156] py-20">
               No projects match that search. Try another term, or{" "}
               <button

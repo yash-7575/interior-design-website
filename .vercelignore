@@ -1,0 +1,3 @@
+# The Sanity Studio is deployed separately with `npx sanity deploy`.
+# Vercel only builds the Vite marketing site.
+studio
