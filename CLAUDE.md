@@ -30,6 +30,11 @@ into a message and opens `wa.me` in a new tab; there is no API layer. A floating
 
 No test framework is configured. Node >= 20.19 required.
 
+`studio/` is a **separate package** — the Sanity Studio, with its own `package.json` and
+`tsconfig`. It is excluded from the Vite build (`.vercelignore`), from `tsc -b`
+(`tsconfig.app.json` includes only `src`) and from ESLint (`globalIgnores`). Run it with
+`cd studio && npm run dev`, publish it with `npx sanity deploy`.
+
 ## Architecture
 
 **Routing** — `main.tsx` mounts `BrowserRouter`; `App.tsx` declares all routes inside a single
@@ -48,15 +53,29 @@ array at the top of `src/sections/Navbar.tsx` — update both.
   `content.ts`, editing one of those pages means editing that page file. `Projects.tsx` is
   the exception: it renders `src/data/projects.ts` and holds no project data of its own.
 
-**Project portfolio** — `src/data/projects.ts` is the single source of truth for the client's
-photography. Each `Project` carries a descriptive name, a `ProjectCategory`, a `scope` line and
-a `images: ProjectImage[]` gallery where every frame has a `caption` used as both alt text and
-lightbox caption. `content.ts` derives the home page's `featured`, `listings` and `posts` from
-this array by id, so the home page and the Projects page cannot show different copy for the
-same work — add a project here and both update. Deliberately no `location` or `year` field: the
-photographs arrived without project identity attached, so projects are named for the work
-visible in the frame rather than for an invented address. `components/Lightbox.tsx` renders the
-galleries (Escape closes, arrows page, body scroll locks).
+**Project portfolio** — two sources, merged at runtime by `src/hooks/useProjects.ts`:
+
+- `src/data/projects.ts` is the **bundled baseline** — ten curated projects imported at build
+  time as fingerprinted WebP with hand-written captions. Each `Project` carries a descriptive
+  name, a `ProjectCategory`, a `scope` line and an `images: ProjectImage[]` gallery where every
+  frame has a `caption` used as both alt text and lightbox caption. Deliberately no `location`
+  or `year` field: the photographs arrived without project identity attached, so projects are
+  named for the work visible in the frame rather than for an invented address.
+- **Sanity** holds whatever the client adds themselves through the Studio in `studio/`
+  (see `studio/README.md`). `useProjects` maps those documents onto the *same* `Project` shape
+  and puts them ahead of the bundled set, so `Lightbox`, the category filter and the search all
+  work on CMS content with no special-casing. The schema's `category` list must stay in step
+  with `ProjectCategory`.
+
+**The fallback is load-bearing.** If Sanity is unreachable, misconfigured, or `VITE_SANITY_*`
+is unset, `/projects` renders the bundled ten rather than an empty grid, and a stalled request
+clears its skeletons after 5s. Keep that property when touching the hook — it is why the site
+cannot be taken down by a CMS outage.
+
+`content.ts` derives the home page's `featured`, `listings` and `posts` from the **bundled**
+array only. The home page is a fixed composition (three slider items, a five-card mosaic with
+one `wide` slot) and deliberately does not show CMS projects.
+`components/Lightbox.tsx` renders the galleries (Escape closes, arrows page, body scroll locks).
 
 **Service catalogue** — `src/data/services.ts` holds all 25 services grouped into six
 `serviceGroups`; `allServices` is the flat numbered list derived from those groups, so

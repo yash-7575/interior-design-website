@@ -1,5 +1,11 @@
 // MegaDream Associates' own project photography, supplied by the client.
 //
+// This is the *bundled baseline* — the ten curated projects, imported at build
+// time so they are fingerprinted, cached and always available. Projects the
+// client adds through the Sanity Studio are layered on top at runtime by
+// `src/hooks/useProjects.ts`; this file stays the fallback when Sanity is
+// unreachable. The home page renders only this set.
+//
 // Naming note: these photographs arrived without client names, addresses or
 // dates attached, so each project is described by the work that is visible in
 // the frame rather than by an invented address. If MegaDream confirms the real
@@ -71,6 +77,9 @@ export type ProjectImage = {
   /** Describes the actual room and workmanship — used as alt text and as the
    *  lightbox caption, so keep it specific. */
   caption: string;
+  /** Smaller variant for grid cards. Only set for CMS images, where the CDN can
+   *  serve a narrower file; bundled images fall back to `src`. */
+  thumb?: string;
 };
 
 export type Project = {
