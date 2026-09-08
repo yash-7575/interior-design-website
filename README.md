@@ -3,7 +3,7 @@
 Marketing site for MegaDream Associates — turnkey interior execution specialists and
 furniture manufacturers based in Pune, Maharashtra.
 
-Vite + React 19 + TypeScript + Tailwind CSS.
+Vite + React 19 + TypeScript + Tailwind CSS, with Supabase behind the `/admin` panel.
 
 ## Editing business details
 
@@ -14,6 +14,25 @@ there and every page updates. The 25 services live in
 
 Enquiries route to WhatsApp (+91 83298 42119) — the contact form pre-fills a message
 and opens `wa.me` rather than posting to a server.
+
+## Admin panel
+
+The client manages the portfolio at `/admin` (email + password, Supabase Auth). Projects
+added there appear on `/projects` once **Published**. If Supabase is unreachable or
+unconfigured, `/projects` falls back to the ten projects bundled in
+[`src/data/projects.ts`](src/data/projects.ts).
+
+Setup is documented in [`SUPABASE_SETUP.md`](SUPABASE_SETUP.md); the schema lives in
+[`supabase/migrations/0001_projects.sql`](supabase/migrations/0001_projects.sql).
+
+Copy `.env.example` to `.env` and fill in:
+
+```
+VITE_SUPABASE_URL=
+VITE_SUPABASE_ANON_KEY=
+```
+
+Only the anon key belongs in the browser. The service-role key must never be committed.
 
 ## Local development
 
@@ -42,3 +61,6 @@ preset is detected automatically (`npm run build` → `dist`).
 
 - rewrites every path to `index.html` so React Router routes deep-link correctly
 - sets immutable caching on hashed `/assets/*`
+
+Set `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` in the Vercel project's environment
+variables, or the deployed `/admin` cannot sign in.

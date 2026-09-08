@@ -6,9 +6,7 @@ import tseslint from 'typescript-eslint'
 import { defineConfig, globalIgnores } from 'eslint/config'
 
 export default defineConfig([
-  // `studio` is the Sanity Studio: a separate package with its own toolchain,
-  // deployed with `npx sanity deploy` rather than built by Vite.
-  globalIgnores(['dist', 'studio']),
+  globalIgnores(['dist']),
   {
     files: ['**/*.{ts,tsx}'],
     extends: [
