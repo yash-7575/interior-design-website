@@ -6,7 +6,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Marketing site for **MegaDream Associates**, a real turnkey interior execution and
 furniture manufacturing firm in Pune, India. Vite + React 19 + TypeScript SPA,
-Tailwind CSS 3, framer-motion. No backend, no tests.
+Tailwind CSS 3, framer-motion. Supabase (Auth + Postgres + Storage) backs the
+`/admin` panel and the projects page. No tests.
 
 **Business details live in exactly one place: `src/data/business.ts`** — name, phone
 numbers, WhatsApp number, email, address, maps link, working hours, socials and the
@@ -30,10 +31,9 @@ into a message and opens `wa.me` in a new tab; there is no API layer. A floating
 
 No test framework is configured. Node >= 20.19 required.
 
-`studio/` is a **separate package** — the Sanity Studio, with its own `package.json` and
-`tsconfig`. It is excluded from the Vite build (`.vercelignore`), from `tsc -b`
-(`tsconfig.app.json` includes only `src`) and from ESLint (`globalIgnores`). Run it with
-`cd studio && npm run dev`, publish it with `npx sanity deploy`.
+`supabase/migrations/0001_projects.sql` is the committed record of the database schema,
+RLS policies and storage bucket. It is not run by any build step — apply it once through
+the Supabase SQL editor or CLI.
 
 ## Architecture
 
@@ -61,16 +61,27 @@ array at the top of `src/sections/Navbar.tsx` — update both.
   frame has a `caption` used as both alt text and lightbox caption. Deliberately no `location`
   or `year` field: the photographs arrived without project identity attached, so projects are
   named for the work visible in the frame rather than for an invented address.
-- **Sanity** holds whatever the client adds themselves through the Studio in `studio/`
-  (see `studio/README.md`). `useProjects` maps those documents onto the *same* `Project` shape
-  and puts them ahead of the bundled set, so `Lightbox`, the category filter and the search all
-  work on CMS content with no special-casing. The schema's `category` list must stay in step
-  with `ProjectCategory`.
+- **Supabase** holds whatever the client publishes themselves through `/admin`.
+  `useProjects` maps those rows onto the *same* `Project` shape (using `slug` as the
+  `Project.id`) and puts them ahead of the bundled set, so `Lightbox`, the category filter and
+  the search all work on CMS content with no special-casing. The `category` CHECK constraint in
+  the migration must stay in step with `ProjectCategory`.
 
-**The fallback is load-bearing.** If Sanity is unreachable, misconfigured, or `VITE_SANITY_*`
-is unset, `/projects` renders the bundled ten rather than an empty grid, and a stalled request
-clears its skeletons after 5s. Keep that property when touching the hook — it is why the site
-cannot be taken down by a CMS outage.
+**The fallback is load-bearing.** If Supabase is unreachable, misconfigured, or
+`VITE_SUPABASE_*` is unset, `/projects` renders the bundled ten rather than an empty grid, and
+a stalled request clears its skeletons after 5s. Keep that property when touching the hook —
+it is why the site cannot be taken down by a backend outage.
+
+**Admin panel** — `/admin` is a second route group in `App.tsx`, deliberately *outside*
+`<Route element={<Layout />}>` so it gets none of the marketing chrome. `/admin/login` is
+public; everything else sits behind `components/admin/RequireAuth.tsx`, which waits for
+`AuthProvider` to restore the session before deciding to redirect (without that gate a refresh
+flashes the login screen). All reads and writes go through `src/lib/adminProjects.ts`.
+Authorisation is enforced by Postgres RLS, never by the client — the browser only ever holds
+the anon key. **Never add the service-role key to this repo.**
+
+Deleting a project removes its storage objects *first*, then the row: `project_images` cascades
+with the project but storage objects do not, and an orphaned file is invisible through the UI.
 
 `content.ts` derives the home page's `featured`, `listings` and `posts` from the **bundled**
 array only. The home page is a fixed composition (three slider items, a five-card mosaic with
@@ -113,11 +124,14 @@ high-resolution logo file, swap the `<svg>` for an `<img>` and the layout is unc
 - `src/lucide-react.d.ts` ambiently declares `lucide-react` because the package ships no types —
   icon imports are `any`. Don't delete it; typecheck breaks.
 - Runtime dependencies are deliberately minimal: react, react-dom, react-router, framer-motion,
-  lucide-react. A vendored shadcn/ui library was removed as unused — if you want one of its
+  lucide-react, @supabase/supabase-js. A vendored shadcn/ui library was removed as unused — if you want one of its
   components, run `npx shadcn@latest init` then `add <component>` rather than hand-rolling the
   Radix wiring.
 - Deployment: Vercel auto-detects the Vite preset. `vercel.json` only adds the SPA rewrite to
-  `index.html` and immutable caching for `/assets/*`.
+  `index.html` and immutable caching for `/assets/*`. `VITE_SUPABASE_URL` and
+  `VITE_SUPABASE_ANON_KEY` must be set in the Vercel project or `/admin` cannot sign in.
+- Supabase image transformations are **not** used for thumbnails — they are a paid-plan feature
+  that fails silently on the free tier. `ProjectImage.thumb` stays undefined for CMS images.
 - Imagery is the client's own, bundled as WebP under `src/assets/img/projects/` and named for
   what the photograph shows. There are no remote image URLs left anywhere in `src/` — keep it
   that way; import assets so Vite fingerprints and caches them. Two exceptions are generated
@@ -127,3 +141,5 @@ high-resolution logo file, swap the `<svg>` for an `<img>` and the layout is unc
   back to initials (`// TODO:` there). Never substitute a stock face under a real person's name.
 - The client's 11 site videos are in the shared Drive folder and unused — the repo bundles no
   video. Compress before ever committing one; the raw clips run to 137 MB.
+- A Sanity Studio previously occupied this role in `studio/`. It was never connected to an
+  account and was removed when Supabase replaced it; don't resurrect references to it.
