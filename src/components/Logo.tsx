@@ -1,30 +1,26 @@
 import { business } from "@/data/business";
+import logoMark from "@/assets/img/logo-mark.webp";
 
 /**
- * The MegaDream mark: yellow disc with the "MD" monogram, matching the
- * brochure logo.
+ * The client's supplied logo mark — the gold disc with its monogram.
  *
- * Placeholder until the high-resolution logo file is supplied — swap the <svg>
- * for an <img> pointing at the real asset and the layout stays identical.
+ * Cut from the artwork the client sent, which had the mark sitting on a black
+ * field above a wordmark. Only the disc is kept, masked to its own ellipse so
+ * the backdrop and the glow around it drop out while the dark monogram inside
+ * stays intact. That matters because every place this renders sits on a dark
+ * background, where a baked-in black square would show as a hard edge.
+ *
+ * `object-contain` keeps the ellipse undistorted in the square boxes the
+ * callers ask for (`w-8 h-8` and friends).
  */
 export function LogoMark({ className = "w-8 h-8" }: { className?: string }) {
   return (
-    <svg viewBox="0 0 48 48" className={className} role="img" aria-label={`${business.name} logo`}>
-      <circle cx="24" cy="24" r="23" fill="#f5c518" />
-      <text
-        x="24"
-        y="24"
-        textAnchor="middle"
-        dominantBaseline="central"
-        fontFamily="'Playfair Display', Georgia, serif"
-        fontSize="19"
-        fontWeight="600"
-        letterSpacing="0.5"
-        fill="#2b241d"
-      >
-        MD
-      </text>
-    </svg>
+    <img
+      src={logoMark}
+      alt={`${business.name} logo`}
+      className={`${className} object-contain select-none`}
+      draggable={false}
+    />
   );
 }
 
