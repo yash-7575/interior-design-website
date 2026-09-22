@@ -19,33 +19,46 @@ export default function FeaturedSlider() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-          className="relative overflow-hidden rounded-2xl h-[70vh] min-h-[520px]"
+          className="relative overflow-hidden rounded-2xl md:h-[70vh] md:min-h-[520px]"
         >
-          <AnimatePresence initial={false} custom={direction}>
-            <motion.img
-              key={index}
-              src={current.image}
-              alt={current.alt}
-              custom={direction}
-              initial={{ opacity: 0, x: direction >= 0 ? 120 : -120, scale: 1.05 }}
-              animate={{ opacity: 1, x: 0, scale: 1 }}
-              exit={{ opacity: 0, x: direction >= 0 ? -120 : 120, scale: 1.02 }}
-              transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
-              className="absolute inset-0 w-full h-full object-cover"
-            />
-          </AnimatePresence>
-          <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent pointer-events-none" />
+          {/* Photograph. On mobile it keeps its own 4:3 slot so the card below
+              cannot cover it; from md up it fills the container and the card
+              floats over it. */}
+          <div className="relative aspect-[4/3] md:absolute md:inset-0 md:aspect-auto">
+            <AnimatePresence initial={false} custom={direction}>
+              <motion.img
+                key={index}
+                src={current.image}
+                alt={current.alt}
+                custom={direction}
+                initial={{ opacity: 0, x: direction >= 0 ? 120 : -120, scale: 1.05 }}
+                animate={{ opacity: 1, x: 0, scale: 1 }}
+                exit={{ opacity: 0, x: direction >= 0 ? -120 : 120, scale: 1.02 }}
+                transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
+                className="absolute inset-0 w-full h-full object-cover"
+              />
+            </AnimatePresence>
+            <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent pointer-events-none" />
+          </div>
 
-          {/* info card */}
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={`card-${index}`}
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-              className="absolute bottom-6 left-6 md:bottom-10 md:left-10 bg-[#faf7f1] rounded-xl p-6 md:p-8 max-w-sm shadow-xl"
-            >
+          {/* info card — sits beneath the photograph on mobile, overlays it from
+              md up.
+
+              On mobile the wrapper is a grid and every card occupies the same
+              cell, so the outgoing and incoming cards stack during a slide
+              change and the wrapper always measures the taller of the two. That
+              keeps the height stable without a hard-coded reserve — a fixed one
+              clipped the longest description at 360px. */}
+          <div className="grid bg-[#faf7f1] md:block md:bg-transparent">
+            <AnimatePresence>
+              <motion.div
+                key={`card-${index}`}
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                className="[grid-area:1/1] bg-[#faf7f1] p-6 md:absolute md:bottom-10 md:left-10 md:max-w-sm md:rounded-xl md:p-8 md:shadow-xl"
+              >
               <h3 className="font-serif-display text-2xl text-[#2b241d]">{current.name}</h3>
               <p className="flex items-center gap-1.5 text-[#8a7d6c] text-sm mt-2">
                 <Layers className="w-3.5 h-3.5" />
@@ -83,8 +96,9 @@ export default function FeaturedSlider() {
                   {current.scope}
                 </span>
               </div>
-            </motion.div>
-          </AnimatePresence>
+              </motion.div>
+            </AnimatePresence>
+          </div>
 
           {/* floating tag card */}
           <AnimatePresence mode="wait">
