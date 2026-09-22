@@ -1,8 +1,24 @@
 # Supabase setup
 
-Everything the `/admin` panel needs. Do this once.
+Everything the `/admin` panel needs.
 
-## 1. Create the project
+## Current state
+
+| | |
+|---|---|
+| Project | `megadream-website` |
+| Ref | `hpgfajztlofpxtrwjatn` |
+| URL | `https://hpgfajztlofpxtrwjatn.supabase.co` |
+| Region | `ap-south-1` (Mumbai) |
+| Plan | Free ($0/month) |
+
+**Steps 1 and 2 below are already done** — the project exists and the schema,
+RLS policies and storage bucket are applied and verified. They are kept here as
+the record of what was run, and for rebuilding from scratch.
+
+**Still outstanding: steps 3, 4 and 5.**
+
+## 1. Create the project ✅ done
 
 [supabase.com/dashboard](https://supabase.com/dashboard) → **New project**.
 Region `ap-south-1` (Mumbai) is closest to Pune. Free tier is sufficient.
@@ -10,7 +26,7 @@ Region `ap-south-1` (Mumbai) is closest to Pune. Free tier is sufficient.
 > The free tier allows **2 active projects per owner**. If creation is refused,
 > pause an unused project first (Dashboard → project → Settings → Pause).
 
-## 2. Apply the schema
+## 2. Apply the schema ✅ done
 
 Dashboard → **SQL Editor** → paste the whole of
 [`supabase/migrations/0001_projects.sql`](supabase/migrations/0001_projects.sql) → **Run**.
@@ -25,10 +41,16 @@ That single script creates:
 Verify afterwards: **Table Editor** shows both tables, and each shows
 "RLS enabled". **Storage** shows a `project-images` bucket marked Public.
 
+Verified on the live project: both tables present with RLS enabled, 14 policies
+(10 on the two tables, 4 on `storage.objects`), bucket public, and the Supabase
+security advisor reports no findings.
+
 ## 3. Wire up the website
 
 Dashboard → **Project Settings → API**. Copy the **Project URL** and the
-**anon / publishable** key.
+**anon / publishable** key. Either key format works — the client is
+`@supabase/supabase-js` 2.116, and both the legacy `anon` JWT and the newer
+`sb_publishable_…` key were confirmed against this project.
 
 Local — copy `.env.example` to `.env`:
 
@@ -82,3 +104,23 @@ An unauthenticated request carrying the anon key therefore cannot write
 anything, and cannot read an unpublished draft, no matter what the frontend
 does. Guarding `/admin` in React is a convenience for the user, not the
 security boundary.
+
+That claim was tested rather than assumed. Against the live project, with one
+published row and one draft row seeded, acting as the `anon` role:
+
+| Attempt | Result |
+|---|---|
+| read projects | only the published row returned; the draft was invisible |
+| read project_images | only the published project's image returned |
+| insert a project | blocked — violates row-level security policy |
+| publish the draft (update) | blocked — no rows updated |
+| delete the published row | blocked — no rows deleted |
+| upload to `storage.objects` | blocked — violates row-level security policy |
+
+The test rows were removed afterwards; the database is empty.
+
+## What has NOT been tested
+
+The browser flow — sign in, add a project, upload photographs, edit, delete —
+has never been run. No admin user exists yet. Step 5 above is the first thing
+to do after step 4.
